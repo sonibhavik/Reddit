@@ -13,17 +13,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        
+        if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+            print("App already launched : \(isAppAlreadyLaunchedOnce)")
+            return true
+        }else{
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            return false
+        }
+    }
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Use a UIHostingController as window root view controller
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = UIHostingController(rootView: ContentView())
-        self.window = window
-        window.makeKeyAndVisible()
+        if isAppAlreadyLaunchedOnce(){
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            let s = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "PostView")
+            window.rootViewController = s
+            self.window = window
+            window.makeKeyAndVisible()
+            
+        }else{
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            let s =  UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+            window.rootViewController = s
+            self.window = window
+            window.makeKeyAndVisible() 
+
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

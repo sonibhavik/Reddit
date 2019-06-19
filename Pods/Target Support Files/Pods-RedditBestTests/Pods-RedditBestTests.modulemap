@@ -1,0 +1,6 @@
+framework module Pods_RedditBestTests {
+  umbrella header "Pods-RedditBestTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
