@@ -52,6 +52,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 250
+        tableView.rowHeight = UITableView.automaticDimension
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
      }
@@ -97,7 +99,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let data = try JSON(data: json)
                             let actualData = data["data"]["children"]
                             for i in 0...9{
-                                    let authorName = String(describing: actualData[i]["data"]["author"])
+                                    let author = String(describing: actualData[i]["data"]["author"])
+                                let authorName = ("posted by: u/\(author)")
                                     let title = String(describing: actualData[i]["data"]["title"])
                                     let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
                                     self.name = String(describing: actualData[i]["data"]["name"])
@@ -111,7 +114,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                     formatter.timeZone = NSTimeZone.local
                                     let components = calendar.dateComponents([.hour], from: unixTimestamp as Date, to: date)
                                     let diff = components.hour!
-                                    let updatedTime = ("\u{2022}\(diff)h")
+                                    let updatedTime = ("\u{2022}\(diff)h ago")
                                 print(diff)
                                     //let differencedTime = current.dateComponents([.minute], from: updatedTime!, to: rightNow).minute
                                     let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed)
@@ -143,9 +146,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.postTime.text = post.postTime
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
+    
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

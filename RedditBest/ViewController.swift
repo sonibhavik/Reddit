@@ -11,8 +11,6 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var license: UILabel!
-    
-    
     @IBOutlet weak var licenseText: UITextView!
     @IBAction func accept(_ sender: Any) {
     }
