@@ -16,16 +16,19 @@ class Post: Decodable{
     let authorName: String
     let postTitle: String
     let postTime: String
-    init(authorName: String, postTitle: String, postTime: String) {
+    let subreddit_name_prefixed: String
+    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String) {
         self.authorName = authorName
         self.postTitle = postTitle
         self.postTime = postTime
+        self.subreddit_name_prefixed = subreddit_name_prefixed
     }
 }
 class TableCell: UITableViewCell {
     @IBOutlet weak var authorName: UILabel!
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var postTime: UILabel!
+    @IBOutlet weak var subReddit: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -49,6 +52,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
      }
 
@@ -84,7 +88,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let api_url = URL(string: "https://oauth.reddit.com/best") else { return }
         let parameter: Parameters =  ["show": "","after": "\(name)", "limit": 10]
         Alamofire.request(api_url, method: .get ,parameters: parameter, headers: headers).validate().responseJSON { (response) in
-            
+            //print(response)
             switch response.result {
                 case .success:
                     print("Validation Successful :)")
@@ -95,15 +99,21 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                             for i in 0...9{
                                     let authorName = String(describing: actualData[i]["data"]["author"])
                                     let title = String(describing: actualData[i]["data"]["title"])
+                                    let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
                                     self.name = String(describing: actualData[i]["data"]["name"])
                                     let time = String(describing: actualData[i]["data"]["created_utc"])
                                     let epocTime = TimeInterval(time)!
                                     let unixTimestamp = NSDate(timeIntervalSince1970: epocTime)
                                     let formatter = DateFormatter()
-                                    formatter.dateFormat = "dd MMMM yyyy HH:MM:SS"
+                                    let date = Date()
+                                    //let calendar = Calendar.current
+                                    formatter.dateFormat = "MMM dd, yyyy HH:MM:SS"
                                     formatter.timeZone = NSTimeZone.local
                                     let updatedTime = formatter.string(from: unixTimestamp as Date)
-                                    let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime)
+                                    let localTime = formatter.string(from: date)
+                                    
+                                    //let differencedTime = current.dateComponents([.minute], from: updatedTime!, to: rightNow).minute
+                                    let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed)
                                     self.posts.append(post)
                                 }
                             OperationQueue.main.addOperation ({
@@ -126,15 +136,16 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableCell
         let post = posts[indexPath.row]
+        cell.subReddit.text = post.subreddit_name_prefixed
         cell.authorName.text = post.authorName
         cell.postTitle.text = post.postTitle
         cell.postTime.text = post.postTime
         return cell
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
+    
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 

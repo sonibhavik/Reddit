@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -22,30 +21,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B4-hi-I2v">
-                                <rect key="frame" x="239" y="840" width="49" height="30"/>
-                                <state key="normal" title="Accept"/>
-                                <connections>
-                                    <action selector="accept:" destination="01J-lp-oVM" eventType="touchUpInside" id="wh7-TK-xDb"/>
-                                    <segue destination="2TA-j8-pSQ" kind="show" id="fCs-dO-7Zz"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsk-a3-2z4">
-                                <rect key="frame" x="132" y="840" width="43" height="30"/>
-                                <state key="normal" title="Reject"/>
-                                <connections>
-                                    <action selector="reject:" destination="01J-lp-oVM" eventType="touchUpInside" id="FEI-PM-7wy"/>
-                                </connections>
-                            </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcc-cq-f64">
-                                <rect key="frame" x="20" y="123" width="374" height="709"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxc-a3-ssz">
-                                        <rect key="frame" x="8" y="8" width="366" height="7506.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="366" id="fEL-xp-ge6"/>
-                                        </constraints>
-                                        <string key="text">Thanks for inquiring about the Reddit application programming interfaces and the related data, code, and other materials provided by Reddit with the API (the “Reddit APIs”). Collectively, we refer to the terms below, any additional terms, terms within the accompanying API documentation, and any applicable policies and guidelines as the "Terms." By using the Reddit APIs, you agree to the Terms with Reddit, Inc. (“Reddit”). If you disagree with any of these Terms, Reddit does not grant you a license to use the Reddit APIs.
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Td8-gO-4Vk">
+                                <rect key="frame" x="20" y="124" width="374" height="5385"/>
+                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5385" id="57e-oD-PXh"/>
+                                </constraints>
+                                <mutableString key="text">Thanks for inquiring about the Reddit application programming interfaces and the related data, code, and other materials provided by Reddit with the API (the “Reddit APIs”). Collectively, we refer to the terms below, any additional terms, terms within the accompanying API documentation, and any applicable policies and guidelines as the "Terms." By using the Reddit APIs, you agree to the Terms with Reddit, Inc. (“Reddit”). If you disagree with any of these Terms, Reddit does not grant you a license to use the Reddit APIs.
 
                     1. Registration.
                     a. Accepting the Terms. You may not use the Reddit APIs and may not accept the Terms if: (a) you are not of legal age to form a binding contract with Reddit, and/or (b) you are a person barred from using or receiving the Reddit APIs under the applicable laws of the United States or other countries, including the country in which you are resident, or from which you use the Reddit APIs.
@@ -113,85 +95,95 @@
 
                     c. General. These Terms do not create any agency, partnership or joint venture between the parties. Nothing in the Terms will limit either party's ability to seek injunctive relief. Reddit is not liable for failure or delay in performance to the extent caused by circumstances beyond our reasonable control. Any failure to enforce any provision of these Terms will not constitute a waiver thereof or of any other provision. If any section (or portion of a section) of these Terms is invalid, illegal or unenforceable, the rest of the Terms will remain in effect. These Terms are governed by the laws of the State of California, excluding its conflict of laws principles. For any dispute relating to these Terms, the parties consent to personal jurisdiction and exclusive venue in San Francisco County, California. These Terms are the entire agreement between you and Reddit relating to its subject and supersede any prior or contemporaneous agreements on that subject.
 
-                    d. Questions. Questions or comments about these Terms or the Reddit APIs may be directed to api@reddit.com</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="Cxc-a3-ssz" firstAttribute="top" secondItem="vcc-cq-f64" secondAttribute="top" constant="8" id="T1Y-1k-0Zg"/>
-                                    <constraint firstAttribute="bottom" secondItem="Cxc-a3-ssz" secondAttribute="bottom" constant="724.5" placeholder="YES" id="bjC-Fw-gZp"/>
-                                    <constraint firstItem="Cxc-a3-ssz" firstAttribute="leading" secondItem="vcc-cq-f64" secondAttribute="leading" constant="8" id="gVt-rK-1Bf"/>
-                                    <constraint firstAttribute="trailing" secondItem="Cxc-a3-ssz" secondAttribute="trailing" id="siX-UJ-5Ic"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="anR-4i-Vuj"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="9t4-eF-ztV"/>
-                            </scrollView>
+                    d. Questions. Questions or comments about these Terms or the Reddit APIs may be directed to api@reddit.com</mutableString>
+                                <color key="textColor" xcode11CocoaTouchSystemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsk-a3-2z4">
+                                <rect key="frame" x="20" y="832" width="43" height="30"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" title="Reject"/>
+                                <connections>
+                                    <action selector="reject:" destination="01J-lp-oVM" eventType="touchUpInside" id="FEI-PM-7wy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B4-hi-I2v">
+                                <rect key="frame" x="345" y="831" width="49" height="30"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" title="Accept"/>
+                                <connections>
+                                    <action selector="accept:" destination="01J-lp-oVM" eventType="touchUpInside" id="wh7-TK-xDb"/>
+                                    <segue destination="RVR-nM-J05" kind="showDetail" id="SmG-0P-kmE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="vcc-cq-f64" firstAttribute="top" secondItem="YfG-3L-hcc" secondAttribute="bottom" constant="7.5" id="0NP-Ql-H6y"/>
-                            <constraint firstItem="9B4-hi-I2v" firstAttribute="top" secondItem="vcc-cq-f64" secondAttribute="bottom" constant="8" id="5y1-n5-3gV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9B4-hi-I2v" secondAttribute="trailing" constant="126" id="6et-2o-2dj"/>
-                            <constraint firstItem="rsk-a3-2z4" firstAttribute="baseline" secondItem="9B4-hi-I2v" secondAttribute="baseline" id="8it-IG-SYW"/>
-                            <constraint firstItem="rsk-a3-2z4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="132" id="9a0-Yd-0eg"/>
+                            <constraint firstItem="Td8-gO-4Vk" firstAttribute="leading" secondItem="rsk-a3-2z4" secondAttribute="leading" id="529-P6-AlZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9B4-hi-I2v" secondAttribute="bottom" constant="1" id="5w5-L8-dj7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9B4-hi-I2v" secondAttribute="trailing" constant="20" id="6et-2o-2dj"/>
+                            <constraint firstItem="rsk-a3-2z4" firstAttribute="baseline" secondItem="9B4-hi-I2v" secondAttribute="baseline" constant="1" id="8it-IG-SYW"/>
+                            <constraint firstItem="rsk-a3-2z4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9a0-Yd-0eg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rsk-a3-2z4" secondAttribute="bottom" id="DCa-o4-UM3"/>
                             <constraint firstItem="9B4-hi-I2v" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rsk-a3-2z4" secondAttribute="trailing" constant="8" symbolic="YES" id="EFZ-Bn-LB2"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vcc-cq-f64" secondAttribute="trailing" constant="20" id="LHI-3y-4kn"/>
-                            <constraint firstItem="vcc-cq-f64" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="MlN-ko-8Mg"/>
+                            <constraint firstItem="Td8-gO-4Vk" firstAttribute="trailing" secondItem="9B4-hi-I2v" secondAttribute="trailing" id="EVh-Oq-0Up"/>
                             <constraint firstItem="YfG-3L-hcc" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OW8-9O-ItC"/>
                             <constraint firstItem="YfG-3L-hcc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Quh-qY-FGl"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="rsk-a3-2z4" secondAttribute="bottom" constant="-8" id="cfW-sf-fFz"/>
-                            <constraint firstItem="vcc-cq-f64" firstAttribute="top" secondItem="YfG-3L-hcc" secondAttribute="bottom" constant="7.5" id="eK4-1Q-JQU"/>
-                            <constraint firstItem="vcc-cq-f64" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="zVS-Z8-9bT"/>
-                            <constraint firstItem="9B4-hi-I2v" firstAttribute="top" secondItem="vcc-cq-f64" secondAttribute="bottom" constant="8" id="zuq-t5-jGR"/>
+                            <constraint firstItem="Td8-gO-4Vk" firstAttribute="top" secondItem="YfG-3L-hcc" secondAttribute="bottom" constant="8.5" id="SG7-R1-T3W"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="rsk-a3-2z4" secondAttribute="bottom" id="cfW-sf-fFz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="rde-t4-tBs"/>
                     <connections>
                         <outlet property="license" destination="YfG-3L-hcc" id="AGk-l8-TfT"/>
-                        <outlet property="licnseText" destination="Cxc-a3-ssz" id="XLS-rI-gAm"/>
-                        <outlet property="scrollView" destination="vcc-cq-f64" id="0kj-VZ-JD5"/>
+                        <outlet property="licenseText" destination="Td8-gO-4Vk" id="WKd-RB-nf5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="373.66071428571428"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="fqp-vd-94G">
             <objects>
                 <viewController storyboardIdentifier="PostView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RVR-nM-J05" customClass="PostViewController" customModule="RedditBest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yBw-fQ-4tD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uXC-83-cR7">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="104" id="TVI-rq-Wk8" customClass="TableCell" customModule="RedditBest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="104"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="102" id="TVI-rq-Wk8" customClass="TableCell" customModule="RedditBest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TVI-rq-Wk8" id="zFh-X4-mRz">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subreddit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9E-Wb-aiu">
+                                                    <rect key="frame" x="20" y="11" width="82" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHn-0J-Ytf">
-                                                    <rect key="frame" x="20" y="2.5" width="43" height="19.5"/>
+                                                    <rect key="frame" x="20" y="40" width="43" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="systemBlueColor"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6z-Vf-Bcb">
-                                                    <rect key="frame" x="20" y="30" width="33.5" height="20.5"/>
+                                                    <rect key="frame" x="20" y="67.5" width="33.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYp-xq-EkZ">
-                                                    <rect key="frame" x="20" y="80.5" width="38" height="20.5"/>
+                                                    <rect key="frame" x="157" y="40" width="38" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -200,19 +192,27 @@
                                             <constraints>
                                                 <constraint firstItem="j6z-Vf-Bcb" firstAttribute="leading" secondItem="zFh-X4-mRz" secondAttribute="leadingMargin" id="4cf-2i-KfS"/>
                                                 <constraint firstItem="j6z-Vf-Bcb" firstAttribute="top" secondItem="oHn-0J-Ytf" secondAttribute="bottom" constant="8" id="5lR-9u-9cd"/>
+                                                <constraint firstItem="mYp-xq-EkZ" firstAttribute="top" secondItem="s9E-Wb-aiu" secondAttribute="bottom" constant="8" id="Hpt-dC-89J"/>
                                                 <constraint firstItem="j6z-Vf-Bcb" firstAttribute="leading" secondItem="oHn-0J-Ytf" secondAttribute="leading" id="JDB-eK-GxR"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s9E-Wb-aiu" secondAttribute="trailing" constant="20" symbolic="YES" id="Jlm-pA-Mdh"/>
+                                                <constraint firstItem="mYp-xq-EkZ" firstAttribute="leading" secondItem="oHn-0J-Ytf" secondAttribute="trailing" constant="94" id="OMM-vU-ASF"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j6z-Vf-Bcb" secondAttribute="trailing" constant="20" symbolic="YES" id="T3e-u9-P3U"/>
-                                                <constraint firstItem="j6z-Vf-Bcb" firstAttribute="top" secondItem="zFh-X4-mRz" secondAttribute="top" constant="30" id="UNA-0m-wwe"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oHn-0J-Ytf" secondAttribute="trailing" constant="20" symbolic="YES" id="WF3-76-PRF"/>
-                                                <constraint firstItem="mYp-xq-EkZ" firstAttribute="top" secondItem="j6z-Vf-Bcb" secondAttribute="bottom" constant="30" id="bZO-gd-CKF"/>
+                                                <constraint firstItem="oHn-0J-Ytf" firstAttribute="top" secondItem="s9E-Wb-aiu" secondAttribute="bottom" constant="8" id="Zjj-ed-oLd"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mYp-xq-EkZ" secondAttribute="trailing" constant="20" symbolic="YES" id="cnH-xy-5OO"/>
-                                                <constraint firstItem="j6z-Vf-Bcb" firstAttribute="leading" secondItem="mYp-xq-EkZ" secondAttribute="leading" id="zV1-pQ-RFa"/>
+                                                <constraint firstItem="j6z-Vf-Bcb" firstAttribute="top" secondItem="mYp-xq-EkZ" secondAttribute="bottom" constant="7" id="zUg-hx-p0v"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="s9E-Wb-aiu" firstAttribute="top" secondItem="TVI-rq-Wk8" secondAttribute="top" constant="11" id="4Fe-wR-x3K"/>
+                                            <constraint firstItem="oHn-0J-Ytf" firstAttribute="leading" secondItem="TVI-rq-Wk8" secondAttribute="leading" constant="20" id="8Wy-jh-Uhg"/>
+                                            <constraint firstItem="s9E-Wb-aiu" firstAttribute="leading" secondItem="TVI-rq-Wk8" secondAttribute="leading" constant="20" id="woS-Ln-7mc"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="authorName" destination="oHn-0J-Ytf" id="TRz-bU-VnK"/>
                                             <outlet property="postTime" destination="mYp-xq-EkZ" id="WOP-57-Ldu"/>
                                             <outlet property="postTitle" destination="j6z-Vf-Bcb" id="fzb-DN-eoz"/>
+                                            <outlet property="subReddit" destination="s9E-Wb-aiu" id="Ckf-bs-JD5"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -238,23 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6h-LA-mDC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1658" y="375"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="78w-jY-5ir">
-            <objects>
-                <navigationController id="2TA-j8-pSQ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xoP-TB-WS4">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="RVR-nM-J05" kind="relationship" relationship="rootViewController" id="Mbd-wt-ec6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Fi-yQ-vrD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="870" y="375"/>
+            <point key="canvasLocation" x="1657.9710144927537" y="375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qJy-X6-SRh">

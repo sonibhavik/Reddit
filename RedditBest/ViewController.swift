@@ -11,8 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var license: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var licnseText: UILabel!
+    
+    
+    @IBOutlet weak var licenseText: UITextView!
     @IBAction func accept(_ sender: Any) {
     }
     @IBAction func reject(_ sender: Any) {
@@ -20,7 +21,7 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: licnseText.bottomAnchor).isActive = true
+        
         // Do any additional setup after loading the view.
     }
     
