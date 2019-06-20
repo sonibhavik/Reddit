@@ -183,24 +183,24 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYp-xq-EkZ">
-                                                    <rect key="frame" x="157" y="40" width="38" height="20.5"/>
+                                                    <rect key="frame" x="71" y="39" width="38" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="mYp-xq-EkZ" firstAttribute="leading" secondItem="oHn-0J-Ytf" secondAttribute="trailing" constant="8" id="2iU-Ca-P0j"/>
                                                 <constraint firstItem="j6z-Vf-Bcb" firstAttribute="leading" secondItem="zFh-X4-mRz" secondAttribute="leadingMargin" id="4cf-2i-KfS"/>
                                                 <constraint firstItem="j6z-Vf-Bcb" firstAttribute="top" secondItem="oHn-0J-Ytf" secondAttribute="bottom" constant="8" id="5lR-9u-9cd"/>
-                                                <constraint firstItem="mYp-xq-EkZ" firstAttribute="top" secondItem="s9E-Wb-aiu" secondAttribute="bottom" constant="8" id="Hpt-dC-89J"/>
+                                                <constraint firstItem="mYp-xq-EkZ" firstAttribute="top" secondItem="s9E-Wb-aiu" secondAttribute="bottom" constant="7" id="Hpt-dC-89J"/>
                                                 <constraint firstItem="j6z-Vf-Bcb" firstAttribute="leading" secondItem="oHn-0J-Ytf" secondAttribute="leading" id="JDB-eK-GxR"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s9E-Wb-aiu" secondAttribute="trailing" constant="20" symbolic="YES" id="Jlm-pA-Mdh"/>
-                                                <constraint firstItem="mYp-xq-EkZ" firstAttribute="leading" secondItem="oHn-0J-Ytf" secondAttribute="trailing" constant="94" id="OMM-vU-ASF"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j6z-Vf-Bcb" secondAttribute="trailing" constant="20" symbolic="YES" id="T3e-u9-P3U"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oHn-0J-Ytf" secondAttribute="trailing" constant="20" symbolic="YES" id="WF3-76-PRF"/>
                                                 <constraint firstItem="oHn-0J-Ytf" firstAttribute="top" secondItem="s9E-Wb-aiu" secondAttribute="bottom" constant="8" id="Zjj-ed-oLd"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mYp-xq-EkZ" secondAttribute="trailing" constant="20" symbolic="YES" id="cnH-xy-5OO"/>
-                                                <constraint firstItem="j6z-Vf-Bcb" firstAttribute="top" secondItem="mYp-xq-EkZ" secondAttribute="bottom" constant="7" id="zUg-hx-p0v"/>
+                                                <constraint firstItem="j6z-Vf-Bcb" firstAttribute="top" secondItem="mYp-xq-EkZ" secondAttribute="bottom" constant="8" id="zUg-hx-p0v"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>

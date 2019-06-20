@@ -106,12 +106,13 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                     let unixTimestamp = NSDate(timeIntervalSince1970: epocTime)
                                     let formatter = DateFormatter()
                                     let date = Date()
-                                    //let calendar = Calendar.current
+                                    let calendar = Calendar.current
                                     formatter.dateFormat = "MMM dd, yyyy HH:MM:SS"
                                     formatter.timeZone = NSTimeZone.local
-                                    let updatedTime = formatter.string(from: unixTimestamp as Date)
-                                    let localTime = formatter.string(from: date)
-                                    
+                                    let components = calendar.dateComponents([.hour], from: unixTimestamp as Date, to: date)
+                                    let diff = components.hour!
+                                    let updatedTime = ("\u{2022}\(diff)h")
+                                print(diff)
                                     //let differencedTime = current.dateComponents([.minute], from: updatedTime!, to: rightNow).minute
                                     let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed)
                                     self.posts.append(post)
