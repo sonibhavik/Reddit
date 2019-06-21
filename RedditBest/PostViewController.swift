@@ -19,13 +19,15 @@ class Post: Decodable{
     let subreddit_name_prefixed: String
     let commentsCount : String
     let ups: String
-    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String) {
+    let link: String
+    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String, link: String) {
         self.authorName = authorName
         self.postTitle = postTitle
         self.postTime = postTime
         self.subreddit_name_prefixed = subreddit_name_prefixed
         self.commentsCount = commentsCount
         self.ups = ups
+        self.link = link
     }
 }
 class TableCell: UITableViewCell {
@@ -34,8 +36,12 @@ class TableCell: UITableViewCell {
     @IBOutlet weak var postTime: UILabel!
     @IBOutlet weak var subReddit: UILabel!
     @IBOutlet weak var Comment: UITextField!
-    @IBOutlet weak var Ups: UITextField!
+    @IBOutlet weak var Ups: UITextField!        
     
+    @IBOutlet weak var shareButton: UIButton!
+    //        let activityVC = UIActivityViewController(activityItems: [self.authorName!,self.postTime!,self.postTitle!,self.subReddit!], applicationActivities: nil)
+//        present(activityVC, animated: true, completion: nil)
+//    }
     override func awakeFromNib() {
         super.awakeFromNib()
         let commentImage = UIImage(named: "comment")
@@ -57,7 +63,6 @@ class TableCell: UITableViewCell {
     }
 }
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
     @IBOutlet weak var tableView: UITableView!
     var accessToken: Any = ""
     var posts = [Post]()
@@ -70,6 +75,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
      }
+    
     func getAccessToken(){
         
         guard let url = URL(string: "https://www.reddit.com/api/v1/access_token") else { return }
@@ -121,6 +127,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                     self.name = String(describing: actualData[i]["data"]["name"])
                                     let commentsCount = String(describing: actualData[i]["data"]["num_comments"])
                                     let ups = String(describing: actualData[i]["data"]["ups"])
+                                let link = String(describing: actualData[i]["data"]["permalink"])
                                     let time = String(describing: actualData[i]["data"]["created_utc"])
                                     let unixTimestamp = NSDate(timeIntervalSince1970: TimeInterval(time)!)
                                     let formatter = DateFormatter()
@@ -131,7 +138,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                     let components = calendar.dateComponents([.hour], from: unixTimestamp as Date, to: date)
                                     let diff = components.hour!
                                     let updatedTime = ("\u{2022}\(diff)h ago")
-                                    let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups)
+                                let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link)
                                     self.posts.append(post)
                                 
                                 }
@@ -151,6 +158,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableCell
@@ -161,9 +169,17 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.postTime.text = post.postTime
         cell.Comment.text = post.commentsCount
         cell.Ups.text = post.ups
+        cell.shareButton.tag = indexPath.row
+        cell.shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
         return cell
     }
-    
+    @objc func tapped(sender: UIButton){
+        let postTitle = String(describing: self.posts[sender.tag].postTitle)
+        let link = String(describing: self.posts[sender.tag].link)
+        let item = "PostTitle: \(postTitle)\n link: \(link)"
+        let activityVC: UIActivityViewController = UIActivityViewController(activityItems: [item], applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
+    }
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

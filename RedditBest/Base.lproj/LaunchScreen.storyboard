@@ -210,7 +210,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="VJf-2k-CLn">
-                                                    <rect key="frame" x="20" y="87.5" width="170" height="34"/>
+                                                    <rect key="frame" x="20" y="87.5" width="245" height="34"/>
                                                     <subviews>
                                                         <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ep4-PG-eXA">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="34"/>
@@ -228,6 +228,10 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNl-lc-Ukx">
+                                                            <rect key="frame" x="220" y="0.0" width="25" height="34"/>
+                                                            <state key="normal" backgroundImage="share"/>
+                                                        </button>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -252,6 +256,7 @@
                                             <outlet property="authorName" destination="PQj-EE-J7P" id="xWl-rA-9J3"/>
                                             <outlet property="postTime" destination="U4i-dY-Zzw" id="ViJ-Dp-CwA"/>
                                             <outlet property="postTitle" destination="5V8-HD-Zqh" id="jOf-qX-m4D"/>
+                                            <outlet property="shareButton" destination="lNl-lc-Ukx" id="1mC-0j-teA"/>
                                             <outlet property="subReddit" destination="c9J-z7-ib3" id="e8A-11-rTw"/>
                                         </connections>
                                     </tableViewCell>
@@ -293,4 +298,7 @@
             <point key="canvasLocation" x="245" y="374"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="share" width="25" height="25"/>
+    </resources>
 </document>
