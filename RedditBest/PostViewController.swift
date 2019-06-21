@@ -33,12 +33,24 @@ class TableCell: UITableViewCell {
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var postTime: UILabel!
     @IBOutlet weak var subReddit: UILabel!
-    @IBOutlet weak var Comment: UILabel!
-    @IBOutlet weak var Ups: UILabel!
+    @IBOutlet weak var Comment: UITextField!
+    @IBOutlet weak var Ups: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        let commentImage = UIImage(named: "comment")
+        imageAdd(txtField: Comment, andImage: commentImage!)
+        let arrowImage = UIImage(named: "arrow")
+        imageAdd(txtField: Ups, andImage: arrowImage!)
         // Initialization code
     }
+    func imageAdd(txtField: UITextField, andImage img: UIImage){
+            let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: img.size.width, height: img.size.height))
+            leftImageView.image = img
+            txtField.leftView = leftImageView
+        txtField.leftViewMode = .always
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state

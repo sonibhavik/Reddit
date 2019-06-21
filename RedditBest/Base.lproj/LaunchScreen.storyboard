@@ -210,20 +210,24 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="VJf-2k-CLn">
-                                                    <rect key="frame" x="20" y="87.5" width="134" height="20.5"/>
+                                                    <rect key="frame" x="20" y="87.5" width="170" height="34"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjs-ui-DUv">
-                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8V-Qe-3h2">
-                                                            <rect key="frame" x="92" y="0.0" width="42" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ep4-PG-eXA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="34"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Zk6-P4-0NL"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Wk-KR-WMV">
+                                                            <rect key="frame" x="110" y="0.0" width="60" height="34"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="c81-2s-z9c"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -231,10 +235,10 @@
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c9J-z7-ib3" secondAttribute="trailing" constant="20" symbolic="YES" id="5Z4-8P-PIb"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="5V8-HD-Zqh" secondAttribute="trailing" constant="8" id="9bz-69-T3d"/>
                                                 <constraint firstItem="VJf-2k-CLn" firstAttribute="top" secondItem="5V8-HD-Zqh" secondAttribute="bottom" constant="10" id="B3d-tA-YiV"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="VJf-2k-CLn" secondAttribute="bottom" constant="5" id="BTS-aN-Alo"/>
                                                 <constraint firstItem="q2n-PB-jpp" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leadingMargin" id="JPd-Bu-k8j"/>
                                                 <constraint firstItem="VJf-2k-CLn" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leadingMargin" id="KQO-ex-gGf"/>
                                                 <constraint firstItem="5V8-HD-Zqh" firstAttribute="top" secondItem="q2n-PB-jpp" secondAttribute="bottom" constant="8" id="MbT-XK-Ac1"/>
+                                                <constraint firstAttribute="bottom" secondItem="VJf-2k-CLn" secondAttribute="bottom" constant="2.5" id="MmL-Uw-rjT"/>
                                                 <constraint firstItem="5V8-HD-Zqh" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leadingMargin" id="XtR-8r-0xE"/>
                                                 <constraint firstItem="5V8-HD-Zqh" firstAttribute="top" secondItem="q2n-PB-jpp" secondAttribute="bottom" constant="8" id="bl8-dl-lDm"/>
                                                 <constraint firstItem="q2n-PB-jpp" firstAttribute="top" secondItem="c9J-z7-ib3" secondAttribute="bottom" constant="8" id="cao-ft-3j6"/>
@@ -243,8 +247,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="Comment" destination="mjs-ui-DUv" id="S6q-ep-28u"/>
-                                            <outlet property="Ups" destination="h8V-Qe-3h2" id="BoM-fU-Ulo"/>
+                                            <outlet property="Comment" destination="3Wk-KR-WMV" id="wCQ-SI-3cp"/>
+                                            <outlet property="Ups" destination="Ep4-PG-eXA" id="FZD-xU-nUL"/>
                                             <outlet property="authorName" destination="PQj-EE-J7P" id="xWl-rA-9J3"/>
                                             <outlet property="postTime" destination="U4i-dY-Zzw" id="ViJ-Dp-CwA"/>
                                             <outlet property="postTitle" destination="5V8-HD-Zqh" id="jOf-qX-m4D"/>
