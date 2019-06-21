@@ -17,11 +17,15 @@ class Post: Decodable{
     let postTitle: String
     let postTime: String
     let subreddit_name_prefixed: String
-    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String) {
+    let commentsCount : String
+    let ups: String
+    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String) {
         self.authorName = authorName
         self.postTitle = postTitle
         self.postTime = postTime
         self.subreddit_name_prefixed = subreddit_name_prefixed
+        self.commentsCount = commentsCount
+        self.ups = ups
     }
 }
 class TableCell: UITableViewCell {
@@ -29,6 +33,8 @@ class TableCell: UITableViewCell {
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var postTime: UILabel!
     @IBOutlet weak var subReddit: UILabel!
+    @IBOutlet weak var Comment: UILabel!
+    @IBOutlet weak var Ups: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,11 +47,6 @@ class TableCell: UITableViewCell {
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var tableView: UITableView!
-    let authorName = Expression<String>("name")
-    let postTitle =  Expression<String>("emial")
-    let postTime = Expression<String>("city")
-    let usersTable = Table("uSer6")
-    var db : Connection!
     var accessToken: Any = ""
     var posts = [Post]()
     var name: String = ""
@@ -57,7 +58,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
      }
-
     func getAccessToken(){
         
         guard let url = URL(string: "https://www.reddit.com/api/v1/access_token") else { return }
@@ -79,9 +79,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 case .failure(let error):
                     print(error)
+                
            }
         }
      }
+    
+
     
     func loadDataFromApi(){
         
@@ -90,7 +93,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let api_url = URL(string: "https://oauth.reddit.com/best") else { return }
         let parameter: Parameters =  ["show": "","after": "\(name)", "limit": 10]
         Alamofire.request(api_url, method: .get ,parameters: parameter, headers: headers).validate().responseJSON { (response) in
-            //print(response)
+            print(response)
             switch response.result {
                 case .success:
                     print("Validation Successful :)")
@@ -100,13 +103,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let actualData = data["data"]["children"]
                             for i in 0...9{
                                     let author = String(describing: actualData[i]["data"]["author"])
-                                let authorName = ("posted by: u/\(author)")
+                                    let authorName = ("posted by: u/\(author)")
                                     let title = String(describing: actualData[i]["data"]["title"])
                                     let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
                                     self.name = String(describing: actualData[i]["data"]["name"])
+                                    let commentsCount = String(describing: actualData[i]["data"]["num_comments"])
+                                    let ups = String(describing: actualData[i]["data"]["ups"])
                                     let time = String(describing: actualData[i]["data"]["created_utc"])
-                                    let epocTime = TimeInterval(time)!
-                                    let unixTimestamp = NSDate(timeIntervalSince1970: epocTime)
+                                    let unixTimestamp = NSDate(timeIntervalSince1970: TimeInterval(time)!)
                                     let formatter = DateFormatter()
                                     let date = Date()
                                     let calendar = Calendar.current
@@ -115,10 +119,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                     let components = calendar.dateComponents([.hour], from: unixTimestamp as Date, to: date)
                                     let diff = components.hour!
                                     let updatedTime = ("\u{2022}\(diff)h ago")
-                                print(diff)
-                                    //let differencedTime = current.dateComponents([.minute], from: updatedTime!, to: rightNow).minute
-                                    let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed)
+                                    let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups)
                                     self.posts.append(post)
+                                
                                 }
                             OperationQueue.main.addOperation ({
                                 self.tableView.reloadData()
@@ -144,6 +147,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.authorName.text = post.authorName
         cell.postTitle.text = post.postTitle
         cell.postTime.text = post.postTime
+        cell.Comment.text = post.commentsCount
+        cell.Ups.text = post.ups
         return cell
     }
     
@@ -152,7 +157,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
         if indexPath.row == posts.count - 1 {
-            self.loadDataFromApi()
+                self.loadDataFromApi()
         }
     }
 }

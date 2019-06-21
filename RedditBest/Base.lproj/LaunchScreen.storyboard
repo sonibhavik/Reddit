@@ -173,11 +173,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="94" id="vdk-sP-IfK" customClass="TableCell" customModule="RedditBest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="94"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="124" id="vdk-sP-IfK" customClass="TableCell" customModule="RedditBest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="124"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vdk-sP-IfK" id="ToI-Xx-mtU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="124"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubReddit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9J-z7-ib3">
@@ -209,12 +209,31 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="VJf-2k-CLn">
+                                                    <rect key="frame" x="20" y="87.5" width="134" height="20.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjs-ui-DUv">
+                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8V-Qe-3h2">
+                                                            <rect key="frame" x="92" y="0.0" width="42" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c9J-z7-ib3" secondAttribute="trailing" constant="20" symbolic="YES" id="5Z4-8P-PIb"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="5V8-HD-Zqh" secondAttribute="bottom" constant="5.5" id="832-Kp-cf1"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="5V8-HD-Zqh" secondAttribute="trailing" constant="8" id="9bz-69-T3d"/>
+                                                <constraint firstItem="VJf-2k-CLn" firstAttribute="top" secondItem="5V8-HD-Zqh" secondAttribute="bottom" constant="10" id="B3d-tA-YiV"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="VJf-2k-CLn" secondAttribute="bottom" constant="5" id="BTS-aN-Alo"/>
                                                 <constraint firstItem="q2n-PB-jpp" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leadingMargin" id="JPd-Bu-k8j"/>
+                                                <constraint firstItem="VJf-2k-CLn" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leadingMargin" id="KQO-ex-gGf"/>
                                                 <constraint firstItem="5V8-HD-Zqh" firstAttribute="top" secondItem="q2n-PB-jpp" secondAttribute="bottom" constant="8" id="MbT-XK-Ac1"/>
                                                 <constraint firstItem="5V8-HD-Zqh" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leadingMargin" id="XtR-8r-0xE"/>
                                                 <constraint firstItem="5V8-HD-Zqh" firstAttribute="top" secondItem="q2n-PB-jpp" secondAttribute="bottom" constant="8" id="bl8-dl-lDm"/>
@@ -224,6 +243,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="Comment" destination="mjs-ui-DUv" id="S6q-ep-28u"/>
+                                            <outlet property="Ups" destination="h8V-Qe-3h2" id="BoM-fU-Ulo"/>
                                             <outlet property="authorName" destination="PQj-EE-J7P" id="xWl-rA-9J3"/>
                                             <outlet property="postTime" destination="U4i-dY-Zzw" id="ViJ-Dp-CwA"/>
                                             <outlet property="postTitle" destination="5V8-HD-Zqh" id="jOf-qX-m4D"/>
