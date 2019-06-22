@@ -20,7 +20,8 @@ class Post: Decodable{
     let commentsCount : String
     let ups: String
     let link: String
-    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String, link: String) {
+    let image: String
+    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String, link: String, image: String) {
         self.authorName = authorName
         self.postTitle = postTitle
         self.postTime = postTime
@@ -28,6 +29,7 @@ class Post: Decodable{
         self.commentsCount = commentsCount
         self.ups = ups
         self.link = link
+        self.image = image
     }
 }
 class TableCell: UITableViewCell {
@@ -38,6 +40,7 @@ class TableCell: UITableViewCell {
     @IBOutlet weak var Comment: UITextField!
     @IBOutlet weak var Ups: UITextField!        
     
+    @IBOutlet weak var imagEView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
     //        let activityVC = UIActivityViewController(activityItems: [self.authorName!,self.postTime!,self.postTitle!,self.subReddit!], applicationActivities: nil)
 //        present(activityVC, animated: true, completion: nil)
@@ -120,28 +123,28 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let data = try JSON(data: json)
                             let actualData = data["data"]["children"]
                             for i in 0...9{
-                                    let author = String(describing: actualData[i]["data"]["author"])
-                                    let authorName = ("posted by: u/\(author)")
-                                    let title = String(describing: actualData[i]["data"]["title"])
-                                    let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
-                                    self.name = String(describing: actualData[i]["data"]["name"])
-                                    let commentsCount = String(describing: actualData[i]["data"]["num_comments"])
-                                    let ups = String(describing: actualData[i]["data"]["ups"])
+                                let author = String(describing: actualData[i]["data"]["author"])
+                                let authorName = ("posted by: u/\(author)")
+                                let title = String(describing: actualData[i]["data"]["title"])
+                                let thumbnail = String(describing: actualData[i]["data"]["thumbnail"])
+                                let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
+                                self.name = String(describing: actualData[i]["data"]["name"])
+                                let commentsCount = String(describing: actualData[i]["data"]["num_comments"])
+                                let ups = String(describing: actualData[i]["data"]["ups"])
                                 let link = String(describing: actualData[i]["data"]["permalink"])
-                                    let time = String(describing: actualData[i]["data"]["created_utc"])
-                                    let unixTimestamp = NSDate(timeIntervalSince1970: TimeInterval(time)!)
-                                    let formatter = DateFormatter()
-                                    let date = Date()
-                                    let calendar = Calendar.current
-                                    formatter.dateFormat = "MMM dd, yyyy HH:MM:SS"
-                                    formatter.timeZone = NSTimeZone.local
-                                    let components = calendar.dateComponents([.hour], from: unixTimestamp as Date, to: date)
-                                    let diff = components.hour!
-                                    let updatedTime = ("\u{2022}\(diff)h ago")
-                                let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link)
-                                    self.posts.append(post)
-                                
-                                }
+                                let time = String(describing: actualData[i]["data"]["created_utc"])
+                                let unixTimestamp = NSDate(timeIntervalSince1970: TimeInterval(time)!)
+                                let formatter = DateFormatter()
+                                let date = Date()
+                                let calendar = Calendar.current
+                                formatter.dateFormat = "MMM dd, yyyy HH:MM:SS"
+                                formatter.timeZone = NSTimeZone.local
+                                let components = calendar.dateComponents([.hour], from: unixTimestamp as Date, to: date)
+                                let diff = components.hour!
+                                let updatedTime = ("\u{2022}\(diff)h ago")
+                                let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: thumbnail)
+                                self.posts.append(post)
+                            }
                             OperationQueue.main.addOperation ({
                                 self.tableView.reloadData()
                             })
@@ -167,6 +170,17 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.authorName.text = post.authorName
         cell.postTitle.text = post.postTitle
         cell.postTime.text = post.postTime
+        let imageUrl = URL(string: post.image)
+        if let image = imageUrl, let imageData = try? Data(contentsOf: image) {
+            print("image is there")
+            cell.imagEView?.isHidden = false
+            let image1 = UIImage(data: imageData)
+            print("imy")
+            cell.imagEView?.image = image1
+        } else {
+            cell.imagEView?.isHidden = true
+        }
+        
         cell.Comment.text = post.commentsCount
         cell.Ups.text = post.ups
         cell.shareButton.tag = indexPath.row
