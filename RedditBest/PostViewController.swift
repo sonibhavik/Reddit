@@ -172,10 +172,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.postTime.text = post.postTime
         let imageUrl = URL(string: post.image)
         if let image = imageUrl, let imageData = try? Data(contentsOf: image) {
-            print("image is there")
             cell.imagEView?.isHidden = false
             let image1 = UIImage(data: imageData)
-            print("imy")
             cell.imagEView?.image = image1
         } else {
             cell.imagEView?.isHidden = true
