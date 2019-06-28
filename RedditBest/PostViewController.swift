@@ -38,13 +38,9 @@ class TableCell: UITableViewCell {
     @IBOutlet weak var postTime: UILabel!
     @IBOutlet weak var subReddit: UILabel!
     @IBOutlet weak var Comment: UITextField!
-    @IBOutlet weak var Ups: UITextField!        
-    
+    @IBOutlet weak var Ups: UITextField!
     @IBOutlet weak var imagEView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
-    //        let activityVC = UIActivityViewController(activityItems: [self.authorName!,self.postTime!,self.postTitle!,self.subReddit!], applicationActivities: nil)
-//        present(activityVC, animated: true, completion: nil)
-//    }
     override func awakeFromNib() {
         super.awakeFromNib()
         let commentImage = UIImage(named: "comment")
@@ -104,8 +100,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
            }
         }
      }
-    
-
     
     func loadDataFromApi(){
         
@@ -178,7 +172,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             cell.imagEView?.isHidden = true
         }
-        
         cell.Comment.text = post.commentsCount
         cell.Ups.text = post.ups
         cell.shareButton.tag = indexPath.row

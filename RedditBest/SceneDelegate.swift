@@ -12,17 +12,17 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-    func isAppAlreadyLaunchedOnce()->Bool{
+    var flag: Int = 0
+    func isAppAlreadyLaunchedOnce(){
         let defaults = UserDefaults.standard
         
         if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
             print("App already launched : \(isAppAlreadyLaunchedOnce)")
-            return true
+            flag = 1
         }else{
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
             print("App launched first time")
-            return false
+            flag = 0
         }
     }
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Use a UIHostingController as window root view controller
-        if isAppAlreadyLaunchedOnce(){
+        if flag ==  1{
             let window = UIWindow(frame: UIScreen.main.bounds)
             let s = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "PostView")
             window.rootViewController = s
