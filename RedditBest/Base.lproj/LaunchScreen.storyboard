@@ -222,7 +222,7 @@ d.  Questions.  Questions or comments about these Terms or the Reddit APIs may b
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="WFW-ZL-Puh">
-                                                    <rect key="frame" x="20" y="45" width="374" height="140"/>
+                                                    <rect key="frame" x="20" y="45" width="374" height="161"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5V8-HD-Zqh">
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -243,7 +243,7 @@ d.  Questions.  Questions or comments about these Terms or the Reddit APIs may b
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="VJf-2k-CLn">
-                                                    <rect key="frame" x="20" y="193" width="374" height="34"/>
+                                                    <rect key="frame" x="20" y="214" width="374" height="34"/>
                                                     <subviews>
                                                         <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ep4-PG-eXA">
                                                             <rect key="frame" x="0.0" y="0.0" width="33" height="34"/>
@@ -264,19 +264,29 @@ d.  Questions.  Questions or comments about these Terms or the Reddit APIs may b
                                                         </button>
                                                     </subviews>
                                                 </stackView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-8z-tEg">
+                                                    <rect key="frame" x="0.0" y="256" width="414" height="10"/>
+                                                    <color key="backgroundColor" red="0.51065956219999997" green="0.51065956219999997" blue="0.51065956219999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="10" id="wes-dY-NMK"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="VJf-2k-CLn" secondAttribute="trailing" constant="20" id="4M6-7G-HOT"/>
                                                 <constraint firstItem="Ep1-3s-8Mo" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leading" constant="20" id="5Vj-To-oEf"/>
                                                 <constraint firstItem="WFW-ZL-Puh" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leading" constant="20" id="Chw-5V-aKP"/>
                                                 <constraint firstItem="Ep1-3s-8Mo" firstAttribute="top" secondItem="ToI-Xx-mtU" secondAttribute="top" id="CjU-ZC-ZN8"/>
+                                                <constraint firstItem="pVe-8z-tEg" firstAttribute="top" secondItem="VJf-2k-CLn" secondAttribute="bottom" constant="8" id="DyB-qi-SUH"/>
                                                 <constraint firstItem="VJf-2k-CLn" firstAttribute="width" secondItem="WFW-ZL-Puh" secondAttribute="width" id="JcJ-FW-yu1"/>
                                                 <constraint firstItem="VJf-2k-CLn" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leading" constant="23" id="NeE-kH-XX1"/>
-                                                <constraint firstAttribute="bottom" secondItem="VJf-2k-CLn" secondAttribute="bottom" constant="39" id="PL6-M8-O9e"/>
                                                 <constraint firstAttribute="trailing" secondItem="WFW-ZL-Puh" secondAttribute="trailing" constant="20" id="Rz0-2r-4ur"/>
+                                                <constraint firstAttribute="bottom" secondItem="pVe-8z-tEg" secondAttribute="bottom" id="T12-UU-9Yb"/>
+                                                <constraint firstItem="pVe-8z-tEg" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leading" id="TiJ-vf-RV2"/>
+                                                <constraint firstItem="pVe-8z-tEg" firstAttribute="top" secondItem="VJf-2k-CLn" secondAttribute="bottom" constant="8" id="UZP-Vh-udZ"/>
                                                 <constraint firstItem="WFW-ZL-Puh" firstAttribute="top" secondItem="Ep1-3s-8Mo" secondAttribute="bottom" constant="8" id="VxM-OG-xdk"/>
                                                 <constraint firstItem="VJf-2k-CLn" firstAttribute="top" secondItem="WFW-ZL-Puh" secondAttribute="bottom" constant="8" id="ZCz-QL-LgO"/>
-                                                <constraint firstItem="VJf-2k-CLn" firstAttribute="top" secondItem="WFW-ZL-Puh" secondAttribute="bottom" constant="8" id="zqi-wf-9wg"/>
+                                                <constraint firstAttribute="trailing" secondItem="pVe-8z-tEg" secondAttribute="trailing" id="jzV-Cm-2br"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
