@@ -108,7 +108,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let api_url = URL(string: "https://oauth.reddit.com/best") else { return }
         let parameter: Parameters =  ["show": "","after": "\(name)", "limit": 10]
         Alamofire.request(api_url, method: .get ,parameters: parameter, headers: headers).validate().responseJSON { (response) in
-            print(response)
+//            print(response)
             switch response.result {
                 case .success:
                     print("Validation Successful :)")

@@ -12,17 +12,18 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var flag: Int = 0
-    func isAppAlreadyLaunchedOnce(){
+    let defaults = UserDefaults.standard
+    
+    func isAppAlreadyLaunchedOnce() -> Bool{
         let defaults = UserDefaults.standard
         
         if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
             print("App already launched : \(isAppAlreadyLaunchedOnce)")
-            flag = 1
+            return true
         }else{
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
             print("App launched first time")
-            flag = 0
+            return false
         }
     }
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -31,21 +32,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Use a UIHostingController as window root view controller
-        if flag ==  1{
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            let s = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "PostView")
-            window.rootViewController = s
-            self.window = window
-            window.makeKeyAndVisible()
-            
+        let flag = defaults.integer(forKey: "flag")
+        print("hello1")
+        if isAppAlreadyLaunchedOnce(){
+            if flag ==  1{
+                print("hello2")
+                let window = UIWindow(frame: UIScreen.main.bounds)
+                let s = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "PostView")
+                window.rootViewController = s
+                self.window = window
+                window.makeKeyAndVisible()
+                
+            }else{
+                print("hello3")
+                let window = UIWindow(frame: UIScreen.main.bounds)
+                let s =  UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+                window.rootViewController = s
+                self.window = window
+                window.makeKeyAndVisible()
+
+            }
         }else{
             let window = UIWindow(frame: UIScreen.main.bounds)
             let s =  UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
             window.rootViewController = s
             self.window = window
-            window.makeKeyAndVisible() 
-
-        }
+            window.makeKeyAndVisible()
+         }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

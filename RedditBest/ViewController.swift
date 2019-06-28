@@ -9,16 +9,18 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     @IBOutlet weak var license: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var licenseText: UILabel!
     @IBAction func accept(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(1, forKey: "flag")
     }
     @IBAction func reject(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(0, forKey: "flag")
         exit(0)
-        let i: SceneDelegate
-        i.flag = 0
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
