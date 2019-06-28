@@ -118,7 +118,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let actualData = data["data"]["children"]
                             for i in 0...9{
                                 let author = String(describing: actualData[i]["data"]["author"])
-                                let authorName = ("posted by: u/\(author)")
+                                
                                 let title = String(describing: actualData[i]["data"]["title"])
                                 let thumbnail = String(describing: actualData[i]["data"]["thumbnail"])
                                 let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
@@ -135,7 +135,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 formatter.timeZone = NSTimeZone.local
                                 let components = calendar.dateComponents([.hour], from: unixTimestamp as Date, to: date)
                                 let diff = components.hour!
-                                let updatedTime = ("\u{2022}\(diff)h ago")
+                                let updatedTime = (" \u{2022} \(diff)h")
+                                let authorName = ("u/\(author) \u{2022} \(diff)h")
                                 let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: thumbnail)
                                 self.posts.append(post)
                             }
@@ -163,7 +164,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.subReddit.text = post.subreddit_name_prefixed
         cell.authorName.text = post.authorName
         cell.postTitle.text = post.postTitle
-        cell.postTime.text = post.postTime
         let imageUrl = URL(string: post.image)
         if let image = imageUrl, let imageData = try? Data(contentsOf: image) {
             cell.imagEView?.isHidden = false
