@@ -20,8 +20,8 @@ class Post{
     let commentsCount : String
     let ups: String
     let link: String
-    let image: UIImage
-    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String, link: String, image: UIImage) {
+    let image: String
+    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String, link: String, image: String) {
         self.authorName = authorName
         self.postTitle = postTitle
         self.postTime = postTime
@@ -65,7 +65,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var accessToken: Any = ""
     var posts = [Post]()
     var name: String = ""
-    
+    var cache: NSCache<NSString, UIImage>! = NSCache()
+    typealias ImageCacheLoaderCompletionHandler = ((UIImage) -> ())
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 250
@@ -73,7 +74,36 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
      }
-    
+    func obtainImageWithPath(imagePath: String, completionHandler: @escaping ImageCacheLoaderCompletionHandler) {
+        print("1")
+        if let image = self.cache.object(forKey: imagePath as NSString) {
+            print("2")
+            DispatchQueue.main.async {
+                completionHandler(image)
+            }
+        } else {
+            print("3")
+            let placeholder = UIImage(named: "images1")!
+            DispatchQueue.main.async {
+                completionHandler(placeholder)
+                print("4")
+            }
+            print("5")
+            Alamofire.request(imagePath).responseData { (response) in
+                if let data = response.result.value{
+                    do{
+                        print("he")
+                        let img: UIImage! = UIImage(data: data)
+                        self.cache.setObject(img, forKey: imagePath as NSString)
+                        DispatchQueue.main.async {
+                            completionHandler(img)
+                        }
+                        
+                    }
+                }
+            }.resume()
+        }
+    }
     func getAccessToken(){
         
         guard let url = URL(string: "https://www.reddit.com/api/v1/access_token") else { return }
@@ -99,9 +129,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
            }
         }
      }
-    func loadImage(){
-        
-    }
+   
     func loadDataFromApi(){
         
         let token = "bearer \(self.accessToken)"
@@ -121,10 +149,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 let author = String(describing: actualData[i]["data"]["author"])
                                 let title = String(describing: actualData[i]["data"]["title"])
                                 let thumbnail = String(describing: actualData[i]["data"]["thumbnail"])
-                                var image1 = UIImage()
-                                if let imageUrl = URL(string: thumbnail), let imageData = try? Data(contentsOf: imageUrl) {
-                                    image1 = UIImage(data: imageData)!
-                                 }
+//                                var image1 = UIImage()
+//                                if let imageUrl = URL(string: thumbnail), let imageData = try? Data(contentsOf: imageUrl) {
+//                                    image1 = UIImage(data: imageData)!
+//                                 }
                                 let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
                                 self.name = String(describing: actualData[i]["data"]["name"])
                                 let commentsCount = String(describing: actualData[i]["data"]["num_comments"])
@@ -141,7 +169,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 let diff = components.hour!
                                 let updatedTime = (" \u{2022} \(diff)h")
                                 let authorName = ("u/\(author) \u{2022} \(diff)h")
-                                let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: image1 )
+                                let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: thumbnail )
                                 self.posts.append(post)
                                 
                             }
@@ -170,12 +198,23 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.authorName.text = post.authorName
         cell.postTitle.text = post.postTitle
         
-        if post.image.size.width != 0{
-            cell.imagEView?.isHidden = false
-            cell.imagEView?.image = post.image
-        } else {
-            cell.imagEView?.isHidden = true
+        self.obtainImageWithPath(imagePath: post.image) { (image) in
+            // Before assigning the image, check whether the current cell is visible
+            if image != UIImage(named: "images1")!{
+                cell.imagEView?.isHidden = false
+                print("false")
+                cell.imagEView.image = image
+            }else{
+                print("true")
+                cell.imagEView?.isHidden = true
+            }
         }
+//        if post.image.size.width != 0{
+//            cell.imagEView?.isHidden = false
+//            cell.imagEView?.image = post.image
+//        } else {
+//            cell.imagEView?.isHidden = true
+//        }
         cell.Comment.text = post.commentsCount
         cell.Ups.text = post.ups
         cell.shareButton.tag = indexPath.row
