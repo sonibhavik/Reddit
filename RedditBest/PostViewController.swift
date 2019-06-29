@@ -12,7 +12,7 @@ import SQLite
 import SwiftyJSON
 import Combine
 
-class Post: Decodable{
+class Post{
     let authorName: String
     let postTitle: String
     let postTime: String
@@ -20,8 +20,8 @@ class Post: Decodable{
     let commentsCount : String
     let ups: String
     let link: String
-    let image: String
-    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String, link: String, image: String) {
+    let image: UIImage
+    init(authorName: String, postTitle: String, postTime: String, subreddit_name_prefixed: String, commentsCount : String, ups: String, link: String, image: UIImage) {
         self.authorName = authorName
         self.postTitle = postTitle
         self.postTime = postTime
@@ -35,7 +35,6 @@ class Post: Decodable{
 class TableCell: UITableViewCell {
     @IBOutlet weak var authorName: UILabel!
     @IBOutlet weak var postTitle: UILabel!
-    @IBOutlet weak var postTime: UILabel!
     @IBOutlet weak var subReddit: UILabel!
     @IBOutlet weak var Comment: UITextField!
     @IBOutlet weak var Ups: UITextField!
@@ -100,7 +99,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
            }
         }
      }
-    
+    func loadImage(){
+        
+    }
     func loadDataFromApi(){
         
         let token = "bearer \(self.accessToken)"
@@ -118,9 +119,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                             let actualData = data["data"]["children"]
                             for i in 0...9{
                                 let author = String(describing: actualData[i]["data"]["author"])
-                                
                                 let title = String(describing: actualData[i]["data"]["title"])
                                 let thumbnail = String(describing: actualData[i]["data"]["thumbnail"])
+                                var image1 = UIImage()
+                                if let imageUrl = URL(string: thumbnail), let imageData = try? Data(contentsOf: imageUrl) {
+                                    image1 = UIImage(data: imageData)!
+                                 }
                                 let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
                                 self.name = String(describing: actualData[i]["data"]["name"])
                                 let commentsCount = String(describing: actualData[i]["data"]["num_comments"])
@@ -137,8 +141,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 let diff = components.hour!
                                 let updatedTime = (" \u{2022} \(diff)h")
                                 let authorName = ("u/\(author) \u{2022} \(diff)h")
-                                let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: thumbnail)
+                                let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: image1 )
                                 self.posts.append(post)
+                                
                             }
                             OperationQueue.main.addOperation ({
                                 self.tableView.reloadData()
@@ -164,11 +169,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.subReddit.text = post.subreddit_name_prefixed
         cell.authorName.text = post.authorName
         cell.postTitle.text = post.postTitle
-        let imageUrl = URL(string: post.image)
-        if let image = imageUrl, let imageData = try? Data(contentsOf: image) {
+        
+        if post.image.size.width != 0{
             cell.imagEView?.isHidden = false
-            let image1 = UIImage(data: imageData)
-            cell.imagEView?.image = image1
+            cell.imagEView?.image = post.image
         } else {
             cell.imagEView?.isHidden = true
         }

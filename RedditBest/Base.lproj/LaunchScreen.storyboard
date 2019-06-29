@@ -161,6 +161,9 @@
                                                         </textField>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNl-lc-Ukx">
                                                             <rect key="frame" x="349" y="0.0" width="25" height="34"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="25" id="5kq-AI-Wr1"/>
+                                                            </constraints>
                                                             <state key="normal" backgroundImage="share"/>
                                                         </button>
                                                     </subviews>
