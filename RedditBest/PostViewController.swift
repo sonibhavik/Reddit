@@ -65,8 +65,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var accessToken: Any = ""
     var posts = [Post]()
     var name: String = ""
-    var cache: NSCache<NSString, UIImage>! = NSCache()
-    typealias ImageCacheLoaderCompletionHandler = ((UIImage) -> ())
+    let imageLoader = ImageDownload()
+//    var cache: NSCache<NSString, UIImage>! = NSCache()
+//    typealias ImageCacheLoaderCompletionHandler = ((UIImage) -> ())
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 250
@@ -74,36 +75,38 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
      }
-    func obtainImageWithPath(imagePath: String, completionHandler: @escaping ImageCacheLoaderCompletionHandler) {
-        print("1")
-        if let image = self.cache.object(forKey: imagePath as NSString) {
-            print("2")
-            DispatchQueue.main.async {
-                completionHandler(image)
-            }
-        } else {
-            print("3")
-            let placeholder = UIImage(named: "images1")!
-            DispatchQueue.main.async {
-                completionHandler(placeholder)
-                print("4")
-            }
-            print("5")
-            Alamofire.request(imagePath).responseData { (response) in
-                if let data = response.result.value{
-                    do{
-                        print("he")
-                        let img: UIImage! = UIImage(data: data)
-                        self.cache.setObject(img, forKey: imagePath as NSString)
-                        DispatchQueue.main.async {
-                            completionHandler(img)
-                        }
-                        
-                    }
-                }
-            }.resume()
-        }
-    }
+    
+//    func obtainImageWithPath(imagePath: String, completionHandler: @escaping ImageCacheLoaderCompletionHandler) {
+//        print("1")
+//        if let image = self.cache.object(forKey: imagePath as NSString) {
+//            print("2")
+//            DispatchQueue.main.async {
+//                completionHandler(image)
+//            }
+//        } else {
+//            print("3")
+//            let placeholder = UIImage(named: "images1")!
+//            DispatchQueue.main.async {
+//                completionHandler(placeholder)
+//                print("4")
+//            }
+//            print("5")
+//            Alamofire.request(imagePath).responseData { (response) in
+//                if let data = response.result.value{
+//                    do{
+//                        print("he")
+//                        let img: UIImage! = UIImage(data: data)
+//                        self.cache.setObject(img, forKey: imagePath as NSString)
+//                        DispatchQueue.main.async {
+//                            completionHandler(img)
+//                        }
+//                        
+//                    }
+//                }
+//            }.resume()
+//        }
+//    }
+    
     func getAccessToken(){
         
         guard let url = URL(string: "https://www.reddit.com/api/v1/access_token") else { return }
@@ -197,17 +200,25 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.subReddit.text = post.subreddit_name_prefixed
         cell.authorName.text = post.authorName
         cell.postTitle.text = post.postTitle
+        if URL(string: post.image)?.host != nil{
+            cell.imagEView?.isHidden = false
+        }else{
+            print("true")
+            cell.imagEView?.isHidden = true
+        }
         
-        self.obtainImageWithPath(imagePath: post.image) { (image) in
+        imageLoader.obtainImageWithPath(imagePath: post.image) { (image) in
             // Before assigning the image, check whether the current cell is visible
-            if image != UIImage(named: "images1")!{
-                cell.imagEView?.isHidden = false
-                print("false")
-                cell.imagEView.image = image
-            }else{
-                print("true")
-                cell.imagEView?.isHidden = true
-            }
+            
+                
+                if let updateCell = tableView.cellForRow(at: indexPath) as? TableCell {
+
+                    updateCell.imagEView.image = image
+                }
+//                cell.imagEView?.isHidden = false
+//                print("false")
+//                cell.imagEView.image = image
+            
         }
 //        if post.image.size.width != 0{
 //            cell.imagEView?.isHidden = false
@@ -234,6 +245,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         if indexPath.row == posts.count - 1 {
                 self.loadDataFromApi()
+       
         }
     }
 }

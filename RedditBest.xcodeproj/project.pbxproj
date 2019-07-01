@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		0702383922B8AFCB00036546 /* RedditBestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702383822B8AFCB00036546 /* RedditBestUITests.swift */; };
 		0702384922B8B5F400036546 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702384822B8B5F400036546 /* ViewController.swift */; };
 		0702384B22B8BFBA00036546 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702384A22B8BFBA00036546 /* PostViewController.swift */; };
+		074D2F4822C7366000B733A8 /* ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074D2F4722C7366000B733A8 /* ImageDownload.swift */; };
 		D1DC4908C71978BE54DC094F /* Pods_RedditBestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C42C6E0D419A292DC28A8 /* Pods_RedditBestTests.framework */; };
 		E18BEC0214AA21607CEB4DFE /* Pods_RedditBestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410E94338BE7AC985FBF9302 /* Pods_RedditBestUITests.framework */; };
 		E7C1CD47C1D60DDFA56CFBD2 /* Pods_RedditBest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB112FC2D77A91D88A05133 /* Pods_RedditBest.framework */; };
@@ -56,6 +57,7 @@
 		0702383A22B8AFCB00036546 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0702384822B8B5F400036546 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0702384A22B8BFBA00036546 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		074D2F4722C7366000B733A8 /* ImageDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownload.swift; sourceTree = "<group>"; };
 		193C6F5C313F8562B1F8B961 /* Pods-RedditBest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditBest.release.xcconfig"; path = "Target Support Files/Pods-RedditBest/Pods-RedditBest.release.xcconfig"; sourceTree = "<group>"; };
 		410E94338BE7AC985FBF9302 /* Pods_RedditBestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditBestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB112FC2D77A91D88A05133 /* Pods_RedditBest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditBest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 				0702382122B8AFCB00036546 /* LaunchScreen.storyboard */,
 				0702384822B8B5F400036546 /* ViewController.swift */,
 				0702384A22B8BFBA00036546 /* PostViewController.swift */,
+				074D2F4722C7366000B733A8 /* ImageDownload.swift */,
 				0702382422B8AFCB00036546 /* Info.plist */,
 				0702381E22B8AFCB00036546 /* Preview Content */,
 			);
@@ -179,7 +182,6 @@
 				9313BFF280C2D6F48EDB4244 /* Pods-RedditBestUITests.debug.xcconfig */,
 				C200DBE2A47815559B62E47A /* Pods-RedditBestUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -407,6 +409,7 @@
 				0702381722B8AFC900036546 /* AppDelegate.swift in Sources */,
 				0702381922B8AFC900036546 /* SceneDelegate.swift in Sources */,
 				0702384922B8B5F400036546 /* ViewController.swift in Sources */,
+				074D2F4822C7366000B733A8 /* ImageDownload.swift in Sources */,
 				0702381B22B8AFC900036546 /* ContentView.swift in Sources */,
 				0702384B22B8BFBA00036546 /* PostViewController.swift in Sources */,
 			);
@@ -579,6 +582,7 @@
 				DEVELOPMENT_TEAM = R5KNL9W9G2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RedditBest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -586,7 +590,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopas.RedditBest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -600,6 +604,7 @@
 				DEVELOPMENT_TEAM = R5KNL9W9G2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RedditBest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -607,7 +612,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopas.RedditBest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

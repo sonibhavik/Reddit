@@ -82,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="962.31884057971024" y="373.66071428571428"/>
+            <point key="canvasLocation" x="1134.7826086956522" y="373.66071428571428"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="fqp-vd-94G">
@@ -183,7 +183,6 @@
                                                 <constraint firstItem="Ep1-3s-8Mo" firstAttribute="top" secondItem="ToI-Xx-mtU" secondAttribute="top" id="CjU-ZC-ZN8"/>
                                                 <constraint firstItem="pVe-8z-tEg" firstAttribute="top" secondItem="VJf-2k-CLn" secondAttribute="bottom" constant="8" id="DyB-qi-SUH"/>
                                                 <constraint firstItem="VJf-2k-CLn" firstAttribute="width" secondItem="WFW-ZL-Puh" secondAttribute="width" id="JcJ-FW-yu1"/>
-                                                <constraint firstItem="VJf-2k-CLn" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leading" constant="23" id="NeE-kH-XX1"/>
                                                 <constraint firstAttribute="trailing" secondItem="WFW-ZL-Puh" secondAttribute="trailing" constant="20" id="Rz0-2r-4ur"/>
                                                 <constraint firstAttribute="bottom" secondItem="pVe-8z-tEg" secondAttribute="bottom" id="T12-UU-9Yb"/>
                                                 <constraint firstItem="pVe-8z-tEg" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leading" id="TiJ-vf-RV2"/>
@@ -193,11 +192,6 @@
                                                 <constraint firstItem="VJf-2k-CLn" firstAttribute="leading" secondItem="ToI-Xx-mtU" secondAttribute="leading" constant="20" id="jik-I6-NhT"/>
                                                 <constraint firstAttribute="trailing" secondItem="pVe-8z-tEg" secondAttribute="trailing" id="jzV-Cm-2br"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="NeE-kH-XX1"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="Comment" destination="3Wk-KR-WMV" id="wCQ-SI-3cp"/>
@@ -240,7 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6h-LA-mDC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1704.375" y="372.5"/>
+            <point key="canvasLocation" x="2305.7971014492755" y="389.0625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dOL-jN-5pI">
@@ -258,7 +252,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aie-KW-SWc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245" y="374"/>
+            <point key="canvasLocation" x="245" y="373.99999999999994"/>
         </scene>
     </scenes>
     <resources>
