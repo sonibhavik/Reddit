@@ -57,7 +57,6 @@ class TableCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
 }
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
@@ -66,8 +65,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var posts = [Post]()
     var name: String = ""
     let imageLoader = ImageDownload()
-//    var cache: NSCache<NSString, UIImage>! = NSCache()
-//    typealias ImageCacheLoaderCompletionHandler = ((UIImage) -> ())
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 250
@@ -75,37 +72,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
      }
-    
-//    func obtainImageWithPath(imagePath: String, completionHandler: @escaping ImageCacheLoaderCompletionHandler) {
-//        print("1")
-//        if let image = self.cache.object(forKey: imagePath as NSString) {
-//            print("2")
-//            DispatchQueue.main.async {
-//                completionHandler(image)
-//            }
-//        } else {
-//            print("3")
-//            let placeholder = UIImage(named: "images1")!
-//            DispatchQueue.main.async {
-//                completionHandler(placeholder)
-//                print("4")
-//            }
-//            print("5")
-//            Alamofire.request(imagePath).responseData { (response) in
-//                if let data = response.result.value{
-//                    do{
-//                        print("he")
-//                        let img: UIImage! = UIImage(data: data)
-//                        self.cache.setObject(img, forKey: imagePath as NSString)
-//                        DispatchQueue.main.async {
-//                            completionHandler(img)
-//                        }
-//                        
-//                    }
-//                }
-//            }.resume()
-//        }
-//    }
     
     func getAccessToken(){
         
@@ -140,7 +106,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let api_url = URL(string: "https://oauth.reddit.com/best") else { return }
         let parameter: Parameters =  ["show": "","after": "\(name)", "limit": 10]
         Alamofire.request(api_url, method: .get ,parameters: parameter, headers: headers).validate().responseJSON { (response) in
-//            print(response)
             switch response.result {
                 case .success:
                     print("Validation Successful :)")
@@ -152,10 +117,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 let author = String(describing: actualData[i]["data"]["author"])
                                 let title = String(describing: actualData[i]["data"]["title"])
                                 let thumbnail = String(describing: actualData[i]["data"]["thumbnail"])
-//                                var image1 = UIImage()
-//                                if let imageUrl = URL(string: thumbnail), let imageData = try? Data(contentsOf: imageUrl) {
-//                                    image1 = UIImage(data: imageData)!
-//                                 }
                                 let subreddit_name_prefixed = String(describing: actualData[i]["data"]["subreddit_name_prefixed"])
                                 self.name = String(describing: actualData[i]["data"]["name"])
                                 let commentsCount = String(describing: actualData[i]["data"]["num_comments"])
@@ -208,24 +169,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         imageLoader.obtainImageWithPath(imagePath: post.image) { (image) in
-            // Before assigning the image, check whether the current cell is visible
-            
-                
-                if let updateCell = tableView.cellForRow(at: indexPath) as? TableCell {
-
-                    updateCell.imagEView.image = image
-                }
-//                cell.imagEView?.isHidden = false
-//                print("false")
-//                cell.imagEView.image = image
-            
-        }
-//        if post.image.size.width != 0{
-//            cell.imagEView?.isHidden = false
-//            cell.imagEView?.image = post.image
-//        } else {
-//            cell.imagEView?.isHidden = true
-//        }
+            if let updateCell = tableView.cellForRow(at: indexPath) as? TableCell {
+                updateCell.imagEView.image = image
+            }
+         }
         cell.Comment.text = post.commentsCount
         cell.Ups.text = post.ups
         cell.shareButton.tag = indexPath.row
@@ -242,10 +189,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
         if indexPath.row == posts.count - 1 {
-                self.loadDataFromApi()
-       
+            self.loadDataFromApi()
         }
     }
 }
