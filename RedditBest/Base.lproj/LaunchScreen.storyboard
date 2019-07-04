@@ -99,7 +99,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" placeholder="Enter Author Name" showsCancelButton="YES" showsScopeBar="YES" id="GsT-TL-sZt">
+                            <searchBar contentMode="redraw" placeholder="Enter " showsCancelButton="YES" showsScopeBar="YES" id="GsT-TL-sZt">
                                 <rect key="frame" x="0.0" y="126" width="414" height="103"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -247,7 +247,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="jpj-g1-Yf4"/>
                     <connections>
-                        <outlet property="searchBar" destination="GsT-TL-sZt" id="WwK-wL-ltG"/>
+                        <outlet property="searchBar" destination="GsT-TL-sZt" id="suY-0D-iDz"/>
                         <outlet property="tableView" destination="5bz-iN-VuM" id="3Fi-lh-xoJ"/>
                     </connections>
                 </viewController>

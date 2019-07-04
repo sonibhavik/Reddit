@@ -241,7 +241,7 @@ extension PostViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         searchIsActive = true
-        
+        searchBar.selectedScopeButtonIndex = 0
         guard !searchText.isEmpty else {
             self.searchedPost = self.posts
             OperationQueue.main.addOperation ({
@@ -260,6 +260,7 @@ extension PostViewController: UISearchBarDelegate{
         searchBar.showsScopeBar = true
         switch index {
         case searchScope.name.rawValue:
+            searchBar.placeholder = "Enter Author Name"
             searchedPost = posts.filter({ q -> Bool in
                 guard let text = searchBar.text else { return false }
                 searchBar.showsScopeBar = true
@@ -271,7 +272,7 @@ extension PostViewController: UISearchBarDelegate{
 
         case searchScope.title.rawValue:
             searchedPost = posts.filter({ q -> Bool in
-                
+                searchBar.placeholder = "Enter Title"
                 guard let text = searchBar.text else { return false }
                 searchBar.showsScopeBar = true
                 return q.postTitle.lowercased().contains(text.lowercased())
@@ -281,6 +282,7 @@ extension PostViewController: UISearchBarDelegate{
                 self.tableView.reloadData()
             })
         case searchScope.subreddit.rawValue:
+            searchBar.placeholder = "Enter SubReddit"
             searchedPost = posts.filter({ q -> Bool in
                 
                 guard let text = searchBar.text else { return false }
@@ -298,7 +300,9 @@ extension PostViewController: UISearchBarDelegate{
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchIsActive = false
         searchBar.text = ""
+        searchBar.placeholder = "Enter"
         searchBar.showsScopeBar = false
+        searchBar.selectedScopeButtonIndex = 0
         self.searchedPost = self.posts
         OperationQueue.main.addOperation ({
             self.tableView.reloadData()
