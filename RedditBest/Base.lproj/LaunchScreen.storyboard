@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -92,8 +93,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reddit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btg-2B-D8O">
+                                <rect key="frame" x="172" y="88" width="70.5" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <searchBar contentMode="redraw" placeholder="Enter Author Name" showsCancelButton="YES" showsScopeBar="YES" id="GsT-TL-sZt">
+                                <rect key="frame" x="0.0" y="126" width="414" height="103"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" cocoaTouchSystemColor="systemGrayColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>AuthorName</string>
+                                    <string>PostTitle</string>
+                                    <string>SubReddit</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="RVR-nM-J05" id="1Hx-ZK-Oyc"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5bz-iN-VuM">
-                                <rect key="frame" x="0.0" y="128" width="414" height="734"/>
+                                <rect key="frame" x="0.0" y="230" width="414" height="666"/>
                                 <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="266" id="vdk-sP-IfK" customClass="TableCell" customModule="RedditBest" customModuleProvider="target">
@@ -205,31 +227,28 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="RVR-nM-J05" id="BWi-wa-OXQ"/>
-                                    <outlet property="delegate" destination="RVR-nM-J05" id="Anm-rJ-GSk"/>
+                                    <outlet property="dataSource" destination="RVR-nM-J05" id="bla-Cw-APx"/>
+                                    <outlet property="delegate" destination="RVR-nM-J05" id="cyo-OI-5aU"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reddit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btg-2B-D8O">
-                                <rect key="frame" x="172" y="88" width="70.5" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="trailing" secondItem="Vlr-hL-Oga" secondAttribute="trailing" id="LUZ-iD-JEB"/>
+                            <constraint firstItem="GsT-TL-sZt" firstAttribute="top" secondItem="Btg-2B-D8O" secondAttribute="bottom" constant="10" id="YLL-g7-X0k"/>
+                            <constraint firstItem="5bz-iN-VuM" firstAttribute="top" secondItem="GsT-TL-sZt" secondAttribute="bottom" constant="1" id="ZR4-RJ-TLE"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="leading" secondItem="Vlr-hL-Oga" secondAttribute="leading" id="en8-bS-kUp"/>
-                            <constraint firstItem="5bz-iN-VuM" firstAttribute="bottom" secondItem="Vlr-hL-Oga" secondAttribute="bottom" id="iOW-PL-fAI"/>
+                            <constraint firstAttribute="bottom" secondItem="5bz-iN-VuM" secondAttribute="bottom" id="k5s-g5-WMg"/>
+                            <constraint firstItem="5bz-iN-VuM" firstAttribute="top" secondItem="GsT-TL-sZt" secondAttribute="bottom" constant="1" id="kQ0-eJ-ugr"/>
                             <constraint firstItem="Btg-2B-D8O" firstAttribute="centerX" secondItem="yBw-fQ-4tD" secondAttribute="centerX" id="l2R-lY-gdN"/>
-                            <constraint firstItem="5bz-iN-VuM" firstAttribute="top" secondItem="Btg-2B-D8O" secondAttribute="bottom" constant="10" id="lxP-Bx-7TG"/>
                             <constraint firstItem="Btg-2B-D8O" firstAttribute="top" secondItem="Vlr-hL-Oga" secondAttribute="top" id="vOO-RO-6hj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vlr-hL-Oga"/>
                     </view>
                     <navigationItem key="navigationItem" id="jpj-g1-Yf4"/>
                     <connections>
-                        <outlet property="tableView" destination="5bz-iN-VuM" id="8KE-ZS-Sdl"/>
+                        <outlet property="searchBar" destination="GsT-TL-sZt" id="WwK-wL-ltG"/>
+                        <outlet property="tableView" destination="5bz-iN-VuM" id="3Fi-lh-xoJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6h-LA-mDC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

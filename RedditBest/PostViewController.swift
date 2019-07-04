@@ -32,6 +32,11 @@ class Post{
         self.image = image
     }
 }
+enum searchScope : Int{
+    case name = 0
+    case title = 1
+    case subreddit = 2
+}
 class TableCell: UITableViewCell {
     @IBOutlet weak var authorName: UILabel!
     @IBOutlet weak var postTitle: UILabel!
@@ -61,14 +66,19 @@ class TableCell: UITableViewCell {
 }
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var accessToken: Any = ""
     var posts = [Post]()
+    var searchedPost = [Post]()
     var name: String = ""
+    var searchIsActive = false
+//    var scopeIndex = 2
     let imageLoader = ImageDownload()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 250
         tableView.rowHeight = UITableView.automaticDimension
+        searchBar.autocapitalizationType = .none
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
      }
@@ -136,10 +146,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: thumbnail )
                                 self.posts.append(post)
                                 
+                                
                             }
                             OperationQueue.main.addOperation ({
                                 self.tableView.reloadData()
                             })
+                            
                         }catch{
                             print("JSON Error")
                         }
@@ -151,33 +163,64 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        
+        if searchIsActive{
+            return searchedPost.count
+        }else{
+            return posts.count
+        }
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableCell
-        let post = posts[indexPath.row]
-        cell.subReddit.text = post.subreddit_name_prefixed
-        cell.authorName.text = post.authorName
-        cell.postTitle.text = post.postTitle
-        if URL(string: post.image)?.host != nil{
-            cell.imagEView?.isHidden = false
-        }else{
-            print("true")
-            cell.imagEView?.isHidden = true
-        }
-        
-        imageLoader.obtainImageWithPath(imagePath: post.image) { (image) in
-            if let updateCell = tableView.cellForRow(at: indexPath) as? TableCell {
-                updateCell.imagEView.image = image
+//        let post : AnyObject
+        if searchIsActive{
+            let post = searchedPost[indexPath.row]
+            cell.subReddit.text = post.subreddit_name_prefixed
+            cell.authorName.text = post.authorName
+            cell.postTitle.text = post.postTitle
+            if URL(string: post.image)?.host != nil{
+                cell.imagEView?.isHidden = false
+            }else{
+                print("true")
+                cell.imagEView?.isHidden = true
             }
-         }
-        cell.Comment.text = post.commentsCount
-        cell.Ups.text = post.ups
-        cell.shareButton.tag = indexPath.row
-        cell.shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
-        return cell
+            
+            imageLoader.obtainImageWithPath(imagePath: post.image) { (image) in
+                if let updateCell = tableView.cellForRow(at: indexPath) as? TableCell {
+                    updateCell.imagEView.image = image
+                }
+            }
+            cell.Comment.text = post.commentsCount
+            cell.Ups.text = post.ups
+            cell.shareButton.tag = indexPath.row
+            cell.shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
+            return cell
+        }else{
+            searchBar.showsScopeBar = false
+            let post = posts[indexPath.row]
+            cell.subReddit.text = post.subreddit_name_prefixed
+            cell.authorName.text = post.authorName
+            cell.postTitle.text = post.postTitle
+            if URL(string: post.image)?.host != nil{
+                cell.imagEView?.isHidden = false
+            }else{
+                print("true")
+                cell.imagEView?.isHidden = true
+            }
+            
+            imageLoader.obtainImageWithPath(imagePath: post.image) { (image) in
+                if let updateCell = tableView.cellForRow(at: indexPath) as? TableCell {
+                    updateCell.imagEView.image = image
+                }
+            }
+            cell.Comment.text = post.commentsCount
+            cell.Ups.text = post.ups
+            cell.shareButton.tag = indexPath.row
+            cell.shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
+            return cell
+        }
     }
     @objc func tapped(sender: UIButton){
         let postTitle = String(describing: self.posts[sender.tag].postTitle)
@@ -192,5 +235,73 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.row == posts.count - 1 {
             self.loadDataFromApi()
         }
+    }
+}
+extension PostViewController: UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchIsActive = true
+        
+        guard !searchText.isEmpty else {
+            self.searchedPost = self.posts
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+            return
+        }
+        
+        searchBarScope(index: searchBar.selectedScopeButtonIndex)
+
+        }
+        
+    
+  
+    func searchBarScope(index: Int) {
+        searchBar.showsScopeBar = true
+        switch index {
+        case searchScope.name.rawValue:
+            searchedPost = posts.filter({ q -> Bool in
+                guard let text = searchBar.text else { return false }
+                searchBar.showsScopeBar = true
+                return q.authorName.lowercased().contains(text.lowercased())
+            })
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+
+        case searchScope.title.rawValue:
+            searchedPost = posts.filter({ q -> Bool in
+                
+                guard let text = searchBar.text else { return false }
+                searchBar.showsScopeBar = true
+                return q.postTitle.lowercased().contains(text.lowercased())
+                
+            })
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+        case searchScope.subreddit.rawValue:
+            searchedPost = posts.filter({ q -> Bool in
+                
+                guard let text = searchBar.text else { return false }
+                searchBar.showsScopeBar = true
+                return q.subreddit_name_prefixed.lowercased().contains(text.lowercased())
+            })
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+        default:
+            break
+        }
+
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchIsActive = false
+        searchBar.text = ""
+        searchBar.showsScopeBar = false
+        self.searchedPost = self.posts
+        OperationQueue.main.addOperation ({
+            self.tableView.reloadData()
+        })
     }
 }
