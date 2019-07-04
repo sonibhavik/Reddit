@@ -174,32 +174,13 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableCell
-//        let post : AnyObject
+        let post : Post
         if searchIsActive{
-            let post = searchedPost[indexPath.row]
-            cell.subReddit.text = post.subreddit_name_prefixed
-            cell.authorName.text = post.authorName
-            cell.postTitle.text = post.postTitle
-            if URL(string: post.image)?.host != nil{
-                cell.imagEView?.isHidden = false
-            }else{
-                print("true")
-                cell.imagEView?.isHidden = true
-            }
-            
-            imageLoader.obtainImageWithPath(imagePath: post.image) { (image) in
-                if let updateCell = tableView.cellForRow(at: indexPath) as? TableCell {
-                    updateCell.imagEView.image = image
-                }
-            }
-            cell.Comment.text = post.commentsCount
-            cell.Ups.text = post.ups
-            cell.shareButton.tag = indexPath.row
-            cell.shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
-            return cell
+            post = searchedPost[indexPath.row]
         }else{
-            searchBar.showsScopeBar = false
-            let post = posts[indexPath.row]
+                searchBar.showsScopeBar = false
+                post = posts[indexPath.row]
+        }
             cell.subReddit.text = post.subreddit_name_prefixed
             cell.authorName.text = post.authorName
             cell.postTitle.text = post.postTitle
@@ -220,7 +201,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.shareButton.tag = indexPath.row
             cell.shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
             return cell
-        }
+        
+        
+        
     }
     @objc func tapped(sender: UIButton){
         let postTitle = String(describing: self.posts[sender.tag].postTitle)
@@ -241,7 +224,6 @@ extension PostViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         searchIsActive = true
-        searchBar.selectedScopeButtonIndex = 0
         guard !searchText.isEmpty else {
             self.searchedPost = self.posts
             OperationQueue.main.addOperation ({
@@ -249,7 +231,7 @@ extension PostViewController: UISearchBarDelegate{
             })
             return
         }
-        
+        searchBar.showsScopeBar = true
         searchBarScope(index: searchBar.selectedScopeButtonIndex)
 
         }
@@ -257,13 +239,12 @@ extension PostViewController: UISearchBarDelegate{
     
   
     func searchBarScope(index: Int) {
-        searchBar.showsScopeBar = true
+//        searchBar.showsScopeBar = true
         switch index {
         case searchScope.name.rawValue:
             searchBar.placeholder = "Enter Author Name"
             searchedPost = posts.filter({ q -> Bool in
                 guard let text = searchBar.text else { return false }
-                searchBar.showsScopeBar = true
                 return q.authorName.lowercased().contains(text.lowercased())
             })
             OperationQueue.main.addOperation ({
@@ -274,7 +255,6 @@ extension PostViewController: UISearchBarDelegate{
             searchedPost = posts.filter({ q -> Bool in
                 searchBar.placeholder = "Enter Title"
                 guard let text = searchBar.text else { return false }
-                searchBar.showsScopeBar = true
                 return q.postTitle.lowercased().contains(text.lowercased())
                 
             })
@@ -286,7 +266,6 @@ extension PostViewController: UISearchBarDelegate{
             searchedPost = posts.filter({ q -> Bool in
                 
                 guard let text = searchBar.text else { return false }
-                searchBar.showsScopeBar = true
                 return q.subreddit_name_prefixed.lowercased().contains(text.lowercased())
             })
             OperationQueue.main.addOperation ({

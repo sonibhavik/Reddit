@@ -247,7 +247,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="jpj-g1-Yf4"/>
                     <connections>
-                        <outlet property="searchBar" destination="GsT-TL-sZt" id="suY-0D-iDz"/>
+                        <outlet property="searchBar" destination="GsT-TL-sZt" id="8um-Mv-uX5"/>
                         <outlet property="tableView" destination="5bz-iN-VuM" id="3Fi-lh-xoJ"/>
                     </connections>
                 </viewController>
