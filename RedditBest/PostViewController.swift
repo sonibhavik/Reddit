@@ -81,6 +81,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         searchBar.autocapitalizationType = .none
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken()
+        searchBar.showsScopeBar = false
      }
     
     func getAccessToken(){
