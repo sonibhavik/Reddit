@@ -221,6 +221,47 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 extension PostViewController: UISearchBarDelegate{
+    func searchBarScope(index: Int) {
+        //        searchBar.showsScopeBar = true
+        switch index {
+        case searchScope.name.rawValue:
+            searchBar.placeholder = "Enter Author Name"
+            searchedPost = posts.filter({ q -> Bool in
+                guard let text = searchBar.text else { return false }
+                return q.authorName.lowercased().contains(text.lowercased())
+            })
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+            
+        case searchScope.title.rawValue:
+            searchedPost = posts.filter({ q -> Bool in
+                searchBar.placeholder = "Enter Title"
+                guard let text = searchBar.text else { return false }
+                return q.postTitle.lowercased().contains(text.lowercased())
+
+            })
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+        case searchScope.subreddit.rawValue:
+            searchBar.placeholder = "Enter SubReddit"
+            searchedPost = posts.filter({ q -> Bool in
+
+                guard let text = searchBar.text else { return false }
+                return q.subreddit_name_prefixed.lowercased().contains(text.lowercased())
+            })
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+        default:
+            break
+        }
+        
+    }
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        searchBarScope(index: searchBar.selectedScopeButtonIndex)
+    }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         searchIsActive = true
@@ -232,50 +273,23 @@ extension PostViewController: UISearchBarDelegate{
             return
         }
         searchBar.showsScopeBar = true
-        searchBarScope(index: searchBar.selectedScopeButtonIndex)
+        switch searchBar.selectedScopeButtonIndex {
+        case 0:
+            searchBarScope(index: searchBar.selectedScopeButtonIndex)
+        case 1:
+            searchBarScope(index: searchBar.selectedScopeButtonIndex)
 
-        }
-        
-    
-  
-    func searchBarScope(index: Int) {
-//        searchBar.showsScopeBar = true
-        switch index {
-        case searchScope.name.rawValue:
-            searchBar.placeholder = "Enter Author Name"
-            searchedPost = posts.filter({ q -> Bool in
-                guard let text = searchBar.text else { return false }
-                return q.authorName.lowercased().contains(text.lowercased())
-            })
-            OperationQueue.main.addOperation ({
-                self.tableView.reloadData()
-            })
-
-        case searchScope.title.rawValue:
-            searchedPost = posts.filter({ q -> Bool in
-                searchBar.placeholder = "Enter Title"
-                guard let text = searchBar.text else { return false }
-                return q.postTitle.lowercased().contains(text.lowercased())
-                
-            })
-            OperationQueue.main.addOperation ({
-                self.tableView.reloadData()
-            })
-        case searchScope.subreddit.rawValue:
-            searchBar.placeholder = "Enter SubReddit"
-            searchedPost = posts.filter({ q -> Bool in
-                
-                guard let text = searchBar.text else { return false }
-                return q.subreddit_name_prefixed.lowercased().contains(text.lowercased())
-            })
-            OperationQueue.main.addOperation ({
-                self.tableView.reloadData()
-            })
+        case 2:
+            searchBarScope(index: searchBar.selectedScopeButtonIndex)
         default:
             break
-        }
+
 
     }
+        
+    }
+  
+   
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchIsActive = false
         searchBar.text = ""
