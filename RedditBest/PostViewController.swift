@@ -230,6 +230,7 @@ extension PostViewController: UISearchBarDelegate{
                 guard let text = searchBar.text else { return false }
                 return q.authorName.lowercased().contains(text.lowercased())
             })
+            
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
@@ -241,6 +242,7 @@ extension PostViewController: UISearchBarDelegate{
                 return q.postTitle.lowercased().contains(text.lowercased())
 
             })
+            
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
@@ -251,6 +253,7 @@ extension PostViewController: UISearchBarDelegate{
                 guard let text = searchBar.text else { return false }
                 return q.subreddit_name_prefixed.lowercased().contains(text.lowercased())
             })
+            
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
@@ -261,12 +264,20 @@ extension PostViewController: UISearchBarDelegate{
     }
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         searchBarScope(index: searchBar.selectedScopeButtonIndex)
+        
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+     
+       
+    
+        searchBar.endEditing(true)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         searchIsActive = true
         guard !searchText.isEmpty else {
             self.searchedPost = self.posts
+            searchBar.endEditing(true)
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
@@ -276,11 +287,14 @@ extension PostViewController: UISearchBarDelegate{
         switch searchBar.selectedScopeButtonIndex {
         case 0:
             searchBarScope(index: searchBar.selectedScopeButtonIndex)
+            
         case 1:
             searchBarScope(index: searchBar.selectedScopeButtonIndex)
+            
 
         case 2:
             searchBarScope(index: searchBar.selectedScopeButtonIndex)
+            
         default:
             break
 
@@ -296,6 +310,7 @@ extension PostViewController: UISearchBarDelegate{
         searchBar.placeholder = "Enter"
         searchBar.showsScopeBar = false
         searchBar.selectedScopeButtonIndex = 0
+        searchBar.endEditing(true)
         self.searchedPost = self.posts
         OperationQueue.main.addOperation ({
             self.tableView.reloadData()
