@@ -33,10 +33,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Use a UIHostingController as window root view controller
         let flag = defaults.integer(forKey: "flag")
-        print("hello1")
         if isAppAlreadyLaunchedOnce(){
             if flag ==  1{
-                print("hello2")
                 let window = UIWindow(frame: UIScreen.main.bounds)
                 let s = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "TabBar")
                 window.rootViewController = s

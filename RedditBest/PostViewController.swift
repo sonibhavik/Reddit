@@ -65,7 +65,35 @@ class TableCell: UITableViewCell {
     }
 }
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+   var flag = true
     @IBOutlet weak var tableView: UITableView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+                tableView.estimatedRowHeight = 250
+                tableView.rowHeight = UITableView.automaticDimension
+                searchBar.autocapitalizationType = .none
+        self.navigationItem.setHidesBackButton(true, animated: false)
+                getAccessToken()
+        
+                searchBar.showsScopeBar = false
+    }
+
+    @IBAction func selectStyle(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            flag = true
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+        case 1:
+            flag = false
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+        default:
+            break
+        }
+    }
     @IBOutlet weak var searchBar: UISearchBar!
     var accessToken: Any = ""
     var posts = [Post]()
@@ -74,18 +102,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var searchIsActive = false
 //    var scopeIndex = 2
     let imageLoader = ImageDownload()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.estimatedRowHeight = 250
-        tableView.rowHeight = UITableView.automaticDimension
-        searchBar.autocapitalizationType = .none
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        getAccessToken()
-        searchBar.showsScopeBar = false
-     }
+   
     
     func getAccessToken(){
-        
+
         guard let url = URL(string: "https://www.reddit.com/api/v1/access_token") else { return }
         let  uuid : String = UIDevice.current.identifierForVendor!.uuidString
         let parameter: Parameters = ["grant_type" : "https://oauth.reddit.com/grants/installed_client", "device_id" : "\(uuid)"]
@@ -105,13 +125,13 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 case .failure(let error):
                     print(error)
-                
+
            }
         }
      }
-   
+
     func loadDataFromApi(){
-        
+
         let token = "bearer \(self.accessToken)"
         let headers = ["Content-Type" : "application/x-www-form-urlencoded", "Authorization" : "\(token)"]
         guard let api_url = URL(string: "https://oauth.reddit.com/best") else { return }
@@ -146,13 +166,13 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 let authorName = ("u/\(author) \u{2022} \(diff)h")
                                 let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: thumbnail )
                                 self.posts.append(post)
-                                
-                                
+
+
                             }
                             OperationQueue.main.addOperation ({
                                 self.tableView.reloadData()
                             })
-                            
+
                         }catch{
                             print("JSON Error")
                         }
@@ -164,7 +184,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         if searchIsActive{
             return searchedPost.count
         }else{
@@ -172,9 +192,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableCell
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: (flag ? "Cell1" : "Cell2"), for: indexPath) as! TableCell
+        
         let post : Post
         if searchIsActive{
             post = searchedPost[indexPath.row]
@@ -191,7 +213,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("true")
                 cell.imagEView?.isHidden = true
             }
-            
+
             imageLoader.obtainImageWithPath(imagePath: post.image) { (image) in
                 if let updateCell = tableView.cellForRow(at: indexPath) as? TableCell {
                     updateCell.imagEView.image = image
@@ -202,9 +224,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.shareButton.tag = indexPath.row
             cell.shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
             return cell
-        
-        
-        
+
+
+
     }
     @objc func tapped(sender: UIButton){
         let postTitle = String(describing: self.posts[sender.tag].postTitle)
@@ -213,8 +235,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         let activityVC: UIActivityViewController = UIActivityViewController(activityItems: [item], applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
     }
-    
-    
+
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == posts.count - 1 {
             self.loadDataFromApi()
@@ -231,11 +253,11 @@ extension PostViewController: UISearchBarDelegate{
                 guard let text = searchBar.text else { return false }
                 return q.authorName.lowercased().contains(text.lowercased())
             })
-            
+
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
-            
+
         case searchScope.title.rawValue:
             searchedPost = posts.filter({ q -> Bool in
                 searchBar.placeholder = "Enter Title"
@@ -243,7 +265,7 @@ extension PostViewController: UISearchBarDelegate{
                 return q.postTitle.lowercased().contains(text.lowercased())
 
             })
-            
+
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
@@ -254,27 +276,27 @@ extension PostViewController: UISearchBarDelegate{
                 guard let text = searchBar.text else { return false }
                 return q.subreddit_name_prefixed.lowercased().contains(text.lowercased())
             })
-            
+
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
         default:
             break
         }
-        
+
     }
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         searchBarScope(index: searchBar.selectedScopeButtonIndex)
-        
+
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-     
-       
-    
+
+
+
         searchBar.endEditing(true)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
         searchIsActive = true
         guard !searchText.isEmpty else {
             self.searchedPost = self.posts
@@ -288,23 +310,23 @@ extension PostViewController: UISearchBarDelegate{
         switch searchBar.selectedScopeButtonIndex {
         case 0:
             searchBarScope(index: searchBar.selectedScopeButtonIndex)
-            
+
         case 1:
             searchBarScope(index: searchBar.selectedScopeButtonIndex)
-            
+
 
         case 2:
             searchBarScope(index: searchBar.selectedScopeButtonIndex)
-            
+
         default:
             break
 
 
     }
-        
+
     }
-  
-   
+
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchIsActive = false
         searchBar.text = ""
