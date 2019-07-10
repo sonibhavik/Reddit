@@ -47,7 +47,7 @@
                                 <state key="normal" title="Accept"/>
                                 <connections>
                                     <action selector="accept:" destination="01J-lp-oVM" eventType="touchUpInside" id="TLf-Eo-vHh"/>
-                                    <segue destination="RVR-nM-J05" kind="show" id="Q13-ot-Wrf"/>
+                                    <segue destination="fIl-NH-HLg" kind="show" id="ZhJ-XV-gal"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7c-NE-mK1" userLabel="Reject">
@@ -85,7 +85,7 @@
             </objects>
             <point key="canvasLocation" x="1134.7826086956522" y="373.66071428571428"/>
         </scene>
-        <!--Post View Controller-->
+        <!--Home-->
         <scene sceneID="fqp-vd-94G">
             <objects>
                 <viewController storyboardIdentifier="PostView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RVR-nM-J05" customClass="PostViewController" customModule="RedditBest" customModuleProvider="target" sceneMemberID="viewController">
@@ -115,7 +115,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5bz-iN-VuM">
-                                <rect key="frame" x="0.0" y="230" width="414" height="666"/>
+                                <rect key="frame" x="0.0" y="230" width="414" height="583"/>
                                 <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="266" id="vdk-sP-IfK" customClass="TableCell" customModule="RedditBest" customModuleProvider="target">
@@ -234,18 +234,18 @@
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="5bz-iN-VuM" firstAttribute="bottom" secondItem="Vlr-hL-Oga" secondAttribute="bottom" id="7fg-fK-D9M"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="trailing" secondItem="Vlr-hL-Oga" secondAttribute="trailing" id="LUZ-iD-JEB"/>
                             <constraint firstItem="GsT-TL-sZt" firstAttribute="top" secondItem="Btg-2B-D8O" secondAttribute="bottom" constant="10" id="YLL-g7-X0k"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="top" secondItem="GsT-TL-sZt" secondAttribute="bottom" constant="1" id="ZR4-RJ-TLE"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="leading" secondItem="Vlr-hL-Oga" secondAttribute="leading" id="en8-bS-kUp"/>
-                            <constraint firstAttribute="bottom" secondItem="5bz-iN-VuM" secondAttribute="bottom" id="k5s-g5-WMg"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="top" secondItem="GsT-TL-sZt" secondAttribute="bottom" constant="1" id="kQ0-eJ-ugr"/>
                             <constraint firstItem="Btg-2B-D8O" firstAttribute="centerX" secondItem="yBw-fQ-4tD" secondAttribute="centerX" id="l2R-lY-gdN"/>
                             <constraint firstItem="Btg-2B-D8O" firstAttribute="top" secondItem="Vlr-hL-Oga" secondAttribute="top" id="vOO-RO-6hj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vlr-hL-Oga"/>
                     </view>
-                    <navigationItem key="navigationItem" id="jpj-g1-Yf4"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="8tU-bA-Y7B"/>
                     <connections>
                         <outlet property="searchBar" destination="GsT-TL-sZt" id="8um-Mv-uX5"/>
                         <outlet property="tableView" destination="5bz-iN-VuM" id="3Fi-lh-xoJ"/>
@@ -253,7 +253,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6h-LA-mDC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2305.7971014492755" y="389.0625"/>
+            <point key="canvasLocation" x="2998.5507246376815" y="312.72321428571428"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="EFq-Ym-JKa">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fIl-NH-HLg" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="adO-Nj-Ip1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="RVR-nM-J05" kind="relationship" relationship="viewControllers" id="q2z-Mq-pMK"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tdd-SX-cn9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2080" y="-37"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dOL-jN-5pI">
@@ -275,6 +292,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="house" catalog="system" width="64" height="54"/>
         <image name="share" width="25" height="25"/>
     </resources>
 </document>

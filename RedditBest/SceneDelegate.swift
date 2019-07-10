@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if flag ==  1{
                 print("hello2")
                 let window = UIWindow(frame: UIScreen.main.bounds)
-                let s = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "PostView")
+                let s = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "TabBar")
                 window.rootViewController = s
                 self.window = window
                 window.makeKeyAndVisible()
