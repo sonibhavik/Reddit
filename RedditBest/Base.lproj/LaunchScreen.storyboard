@@ -94,7 +94,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reddit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btg-2B-D8O">
-                                <rect key="frame" x="172" y="88" width="70.5" height="28"/>
+                                <rect key="frame" x="172" y="44" width="70.5" height="72"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -246,6 +246,7 @@
                         <viewLayoutGuide key="safeArea" id="Vlr-hL-Oga"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="8tU-bA-Y7B"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="GsT-TL-sZt" id="8um-Mv-uX5"/>
                         <outlet property="tableView" destination="5bz-iN-VuM" id="3Fi-lh-xoJ"/>
@@ -259,6 +260,7 @@
         <scene sceneID="EFq-Ym-JKa">
             <objects>
                 <tabBarController storyboardIdentifier="TabBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fIl-NH-HLg" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="adO-Nj-Ip1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
