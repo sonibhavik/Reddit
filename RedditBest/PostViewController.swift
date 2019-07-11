@@ -64,20 +64,36 @@ class TableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 }
-class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MyDataSendingDelegateProtocol {
+   var sortType = ""
+    var interval = ""
+    var flagOfInterval = false
    var flag = true
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sortByButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-                tableView.estimatedRowHeight = 250
-                tableView.rowHeight = UITableView.automaticDimension
-                searchBar.autocapitalizationType = .none
+        tableView.estimatedRowHeight = 250
+        tableView.rowHeight = UITableView.automaticDimension
+        searchBar.autocapitalizationType = .none
         self.navigationItem.setHidesBackButton(true, animated: false)
-                getAccessToken()
-        
-                searchBar.showsScopeBar = false
+        getAccessToken(type: "best")
+        searchBar.showsScopeBar = false
     }
-
+    func sendIntervalToPostViewController(myData: String){
+        interval = myData
+        flagOfInterval = true
+    }
+    func sendDataToPostViewController(myData: String) {
+        posts.removeAll()
+        OperationQueue.main.addOperation ({
+            self.tableView.reloadData()
+        })
+        self.sortType = myData
+        name = ""
+        getAccessToken(type: sortType)
+    }
+    
     @IBAction func selectStyle(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -100,12 +116,17 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var searchedPost = [Post]()
     var name: String = ""
     var searchIsActive = false
-//    var scopeIndex = 2
     let imageLoader = ImageDownload()
-   
     
-    func getAccessToken(){
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "getDataSegue" {
+            let secondVC: SortByViewController = segue.destination as! SortByViewController
+            secondVC.delegate = self
+        }
+    }
+    
+    func getAccessToken(type: String){
+        
         guard let url = URL(string: "https://www.reddit.com/api/v1/access_token") else { return }
         let  uuid : String = UIDevice.current.identifierForVendor!.uuidString
         let parameter: Parameters = ["grant_type" : "https://oauth.reddit.com/grants/installed_client", "device_id" : "\(uuid)"]
@@ -121,7 +142,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     if let result = response.result.value {
                         let responseDict = result as! [String : Any]
                         self.accessToken = responseDict["access_token"]!
-                        self.loadDataFromApi()
+                        self.loadDataFromApi(text: type)
                     }
                 case .failure(let error):
                     print(error)
@@ -130,12 +151,20 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
      }
 
-    func loadDataFromApi(){
-
+    func loadDataFromApi(text: String){
         let token = "bearer \(self.accessToken)"
         let headers = ["Content-Type" : "application/x-www-form-urlencoded", "Authorization" : "\(token)"]
-        guard let api_url = URL(string: "https://oauth.reddit.com/best") else { return }
-        let parameter: Parameters =  ["show": "","after": "\(name)", "limit": 10]
+       
+        guard let api_url = URL(string: "https://oauth.reddit.com/\(text)") else { return }
+        var parameter = Parameters()
+        if flagOfInterval{
+            parameter = ["show": "", "t": "\(interval)", "after": "\(name)", "limit": 10]
+            print(parameter)
+        }
+        else{
+            parameter = ["show": "","after": "\(name)", "limit": 10]
+        }
+        
         Alamofire.request(api_url, method: .get ,parameters: parameter, headers: headers).validate().responseJSON { (response) in
             switch response.result {
                 case .success:
@@ -166,7 +195,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 let authorName = ("u/\(author) \u{2022} \(diff)h")
                                 let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: thumbnail )
                                 self.posts.append(post)
-
+                                print(title)
 
                             }
                             OperationQueue.main.addOperation ({
@@ -239,7 +268,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == posts.count - 1 {
-            self.loadDataFromApi()
+            self.loadDataFromApi(text: sortType)
         }
     }
 }
