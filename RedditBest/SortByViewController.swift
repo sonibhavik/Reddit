@@ -13,7 +13,7 @@ protocol MyDataSendingDelegateProtocol {
 }
 class SortByViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var dataToBeSent = ""
-    let intervals = ["Now","Today","This week","This Month","This Year","All Time"]
+    let intervals = ["Now","Today","This week","This Month","This Year","ALl Time"]
     var interval = ""
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
