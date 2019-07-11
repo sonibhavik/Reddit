@@ -29,10 +29,11 @@ class ImageDownload{
                 if let data = response.result.value{
                     do{
                         print("he")
-                        let img: UIImage! = UIImage(data: data)
-                        self.cache.setObject(img, forKey: imagePath as NSString)
-                        DispatchQueue.main.async {
-                            completionHandler(img)
+                        if let img: UIImage = UIImage(data: data){
+                            self.cache.setObject(img , forKey: imagePath as NSString)
+                            DispatchQueue.main.async {
+                                completionHandler(img )
+                            }
                         }
                         
                     }

@@ -64,52 +64,266 @@ class TableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 }
-class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MyDataSendingDelegateProtocol {
-   var sortType = ""
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+   var sortByName = ""
     var interval = ""
     var flagOfInterval = false
    var flag = true
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var styleButton: UIButton!
     @IBOutlet weak var sortByButton: UIButton!
+    @IBAction func sortBy(_ sender: Any) {
+        
+            let alert = UIAlertController(title: "SORT POSTS BY", message: "Please Select an Option", preferredStyle: .actionSheet)
+            let hotButton = UIAlertAction(title: "Hot", style: .default, handler: { (_) in
+                self.name = ""
+                self.sortByName = "HOT".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+        alert.addAction(hotButton)
+            let newButton = UIAlertAction(title: "New", style: .default, handler: { (_) in
+                self.name = ""
+                self.sortByName = "NEW".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+        alert.addAction(newButton)
+       
+
+            let topButton = UIAlertAction(title: "Top", style: .default, handler: { (_) in
+                
+                    let alert = UIAlertController(title: "TOP POSTS FROM", message: "Please Select an Option", preferredStyle: .actionSheet)
+                    self.flagOfInterval = true
+                    self.name = ""
+                    let nowButton = UIAlertAction(title: "Now", style: .default, handler: { (_) in
+                        
+                        self.interval = "hour"
+                        self.sortByName = "TOP".lowercased()
+                        self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS NOW", for: .normal)
+                        self.getAccessToken(type: self.sortByName)
+                    })
+                    
+                    let todayButton = UIAlertAction(title: "Today", style: .default, handler: { (_) in
+                        self.interval = "day"
+                        self.sortByName = "TOP".lowercased()
+                        self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS TODAY", for: .normal)
+                        self.getAccessToken(type: self.sortByName)
+                    })
+                    
+                    let weekButton = UIAlertAction(title: "This Week", style: .default, handler: { (_) in
+                        self.interval = "week"
+                        self.sortByName = "TOP".lowercased()
+                        self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS THIS WEEK", for: .normal)
+                        self.getAccessToken(type: self.sortByName)
+                    })
+                    
+                    let monthButton = UIAlertAction(title: "This Month", style: .default, handler: { (_) in
+                        self.interval = "month"
+                        self.sortByName = "TOP".lowercased()
+                        self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS THIS MONTH", for: .normal)
+                        self.getAccessToken(type: self.sortByName)
+                    })
+                    let yearButton = UIAlertAction(title: "This Year", style: .default, handler: { (_) in
+                        self.interval = "year"
+                        self.sortByName = "TOP".lowercased()
+                        self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS THIS YEAR", for: .normal)
+                        self.getAccessToken(type: self.sortByName)
+                    })
+                    let allButton = UIAlertAction(title: "All Time", style: .default, handler: { (_) in
+                        self.interval = "all"
+                        self.sortByName = "TOP".lowercased()
+                        self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS ALL TIME", for: .normal)
+                        self.getAccessToken(type: self.sortByName)
+                    })
+                    alert.addAction(nowButton)
+                    alert.addAction(todayButton)
+                    alert.addAction(weekButton)
+                    alert.addAction(monthButton)
+                    alert.addAction(yearButton)
+                    alert.addAction(allButton)
+                
+                alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
+                    self.getAccessToken(type: "hot")
+                    self.dismiss(animated: true, completion: nil)
+                }))
+
+                    self.present(alert, animated: true, completion: {
+                        print("completion block")
+                    })
+               
+                
+            })
+            alert.addAction(topButton)
+            
+        let controversialButton = UIAlertAction(title: "Controversial", style: .default, handler: { (_) in
+            let alert = UIAlertController(title: "CONTROVERSIAL POSTS FROM", message: "Please Select an Option", preferredStyle: .actionSheet)
+            self.flagOfInterval = true
+            self.name = ""
+
+            let nowButton = UIAlertAction(title: "Now", style: .default, handler: { (_) in
+                
+                self.interval = "hour"
+                self.sortByName = "CONTROVERSIAL".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS NOW", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+            
+            let todayButton = UIAlertAction(title: "Today", style: .default, handler: { (_) in
+                self.interval = "day"
+                self.sortByName = "CONTROVERSIAL".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS TODAY", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+            
+            let weekButton = UIAlertAction(title: "This Week", style: .default, handler: { (_) in
+                self.interval = "week"
+                self.sortByName = "CONTROVERSIAL".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS THIS WEEK", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+            
+            let monthButton = UIAlertAction(title: "This Month", style: .default, handler: { (_) in
+                self.interval = "month"
+                self.sortByName = "CONTROVERSIAL".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS THIS MONTH", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+            let yearButton = UIAlertAction(title: "This Year", style: .default, handler: { (_) in
+                self.interval = "year"
+                self.sortByName = "CONTROVERSIAL".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS THIS YEAR", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+            let allButton = UIAlertAction(title: "All Time", style: .default, handler: { (_) in
+                self.interval = "all"
+                self.sortByName = "CONTROVERSIAL".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS ALL TIME", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+            alert.addAction(nowButton)
+            alert.addAction(todayButton)
+            alert.addAction(weekButton)
+            alert.addAction(monthButton)
+            alert.addAction(yearButton)
+            alert.addAction(allButton)
+            
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
+                self.getAccessToken(type: "hot")
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(alert, animated: true, completion: {
+                print("completion block")
+            })
+            
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
+                self.getAccessToken(type: "hot")
+                self.dismiss(animated: true, completion: nil)
+            }))
+
+            self.present(alert, animated: true, completion: {
+                print("completion block")
+            })
+            
+        })
+        alert.addAction(controversialButton)
+            let risingButton = UIAlertAction(title: "Rising", style: .default, handler: { (_) in
+                self.name = ""
+
+                self.sortByName = "RISING".lowercased()
+                self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS", for: .normal)
+                self.getAccessToken(type: self.sortByName)
+            })
+        alert.addAction(risingButton)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
+                self.getAccessToken(type: "hot")
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(alert, animated: true, completion: {
+                print("completion block")
+            })
+            posts.removeAll()
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+//            let sortByButtonName = "\(self.sortType)".uppercased()
+//            sortByButton.setTitle(sortByButtonName, for: .normal)
+//            getAccessToken(type: sortType)
+        
+       
+    }
+    @IBAction func changePostStyle(_ sender: Any) {
+        let alert = UIAlertController(title: "Post Style", message: "Please Select an Option", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Card", style: .default, handler: { (_) in
+            self.styleButton.setTitle("CARD", for: .normal)
+            self.flag = true
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Classic", style: .default, handler: { (_) in
+            self.styleButton.setTitle("CLASSIC", for: .normal)
+            self.flag = false
+            OperationQueue.main.addOperation ({
+                self.tableView.reloadData()
+            })
+        }))
+        
+        
+        alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 250
         tableView.rowHeight = UITableView.automaticDimension
         searchBar.autocapitalizationType = .none
         self.navigationItem.setHidesBackButton(true, animated: false)
-        getAccessToken(type: "best")
+        getAccessToken(type: "hot")
         searchBar.showsScopeBar = false
     }
-    func sendIntervalToPostViewController(myData: String){
-        interval = myData
-        flagOfInterval = true
-    }
-    func sendDataToPostViewController(myData: String) {
-        posts.removeAll()
-        OperationQueue.main.addOperation ({
-            self.tableView.reloadData()
-        })
-        self.sortType = myData
-        name = ""
-        getAccessToken(type: sortType)
-    }
+//    func sendIntervalToPostViewController(myData: String){
+//        interval = myData
+//        flagOfInterval = true
+//    }
+//    func sendDataToPostViewController(myData: String) {
+//        posts.removeAll()
+//        OperationQueue.main.addOperation ({
+//            self.tableView.reloadData()
+//        })
+//        self.sortType = myData
+//        name = ""
+//        let sortByButtonName = "\(self.sortType)".uppercased()
+//        sortByButton.setTitle(sortByButtonName, for: .normal)
+//        getAccessToken(type: sortType)
+//    }
     
-    @IBAction func selectStyle(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            flag = true
-            OperationQueue.main.addOperation ({
-                self.tableView.reloadData()
-            })
-        case 1:
-            flag = false
-            OperationQueue.main.addOperation ({
-                self.tableView.reloadData()
-            })
-        default:
-            break
-        }
-    }
+//    @IBAction func selectStyle(_ sender: UISegmentedControl) {
+//        switch sender.selectedSegmentIndex {
+//        case 0:
+//            flag = true
+//            OperationQueue.main.addOperation ({
+//                self.tableView.reloadData()
+//            })
+//        case 1:
+//            flag = false
+//            OperationQueue.main.addOperation ({
+//                self.tableView.reloadData()
+//            })
+//        default:
+//            break
+//        }
+//    }
     @IBOutlet weak var searchBar: UISearchBar!
     var accessToken: Any = ""
     var posts = [Post]()
@@ -118,12 +332,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var searchIsActive = false
     let imageLoader = ImageDownload()
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "getDataSegue" {
-            let secondVC: SortByViewController = segue.destination as! SortByViewController
-            secondVC.delegate = self
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "getDataSegue" {
+//            let secondVC: SortByViewController = segue.destination as! SortByViewController
+//            secondVC.delegate = self
+//        }
+//    }
     
     func getAccessToken(type: String){
         
@@ -142,6 +356,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     if let result = response.result.value {
                         let responseDict = result as! [String : Any]
                         self.accessToken = responseDict["access_token"]!
+                        print(self.interval)
                         self.loadDataFromApi(text: type)
                     }
                 case .failure(let error):
@@ -163,6 +378,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         else{
             parameter = ["show": "","after": "\(name)", "limit": 10]
+            print(parameter)
         }
         
         Alamofire.request(api_url, method: .get ,parameters: parameter, headers: headers).validate().responseJSON { (response) in
@@ -267,8 +483,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       
         if indexPath.row == posts.count - 1 {
-            self.loadDataFromApi(text: sortType)
+            self.loadDataFromApi(text: sortByName)
         }
     }
 }
