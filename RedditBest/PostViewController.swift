@@ -69,12 +69,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var interval = ""
     var flagOfInterval = false
    var flag = true
+        let myIndicator = UIActivityIndicatorView(style : UIActivityIndicatorView.Style.medium)
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var styleButton: UIButton!
     @IBOutlet weak var sortByButton: UIButton!
     @IBAction func sortBy(_ sender: Any) {
-        
+    
+            myIndicator.startAnimating()
             let alert = UIAlertController(title: "SORT POSTS BY", message: "Please Select an Option", preferredStyle: .actionSheet)
             let hotButton = UIAlertAction(title: "Hot", style: .default, handler: { (_) in
                 self.name = ""
@@ -278,7 +280,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         tableView.estimatedRowHeight = 250
         tableView.rowHeight = UITableView.automaticDimension
+        myIndicator.center = view.center
         searchBar.autocapitalizationType = .none
+        view.addSubview(myIndicator)
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken(type: "hot")
         searchBar.showsScopeBar = false
@@ -331,7 +335,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 //    }
     
     func getAccessToken(type: String){
-        
+        myIndicator.startAnimating()
         guard let url = URL(string: "https://www.reddit.com/api/v1/access_token") else { return }
         let  uuid : String = UIDevice.current.identifierForVendor!.uuidString
         let parameter: Parameters = ["grant_type" : "https://oauth.reddit.com/grants/installed_client", "device_id" : "\(uuid)"]
@@ -402,6 +406,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 let authorName = ("u/\(author) \u{2022} \(diff)h")
                                 let post = Post(authorName: authorName, postTitle: title, postTime: updatedTime, subreddit_name_prefixed: subreddit_name_prefixed, commentsCount: commentsCount, ups: ups, link: link, image: thumbnail )
                                 self.posts.append(post)
+                                self.myIndicator.stopAnimating()
                                 print(title)
 
                             }
