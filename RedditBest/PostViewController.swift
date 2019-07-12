@@ -218,15 +218,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("completion block")
             })
             
-            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
-                self.getAccessToken(type: "hot")
-                self.dismiss(animated: true, completion: nil)
-            }))
-
-            self.present(alert, animated: true, completion: {
-                print("completion block")
-            })
-            
         })
         alert.addAction(controversialButton)
             let risingButton = UIAlertAction(title: "Rising", style: .default, handler: { (_) in
