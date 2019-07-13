@@ -68,7 +68,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
    var sortByName = ""
     var interval = ""
     var flagOfInterval = false
-   var flag = true
+   var flag = false
         let myIndicator = UIActivityIndicatorView(style : UIActivityIndicatorView.Style.medium)
     @IBOutlet weak var tableView: UITableView!
     
@@ -253,7 +253,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         alert.addAction(UIAlertAction(title: "Card", style: .default, handler: { (_) in
             self.styleButton.setTitle("CARD", for: .normal)
-            self.flag = true
+            self.flag = false
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
@@ -261,7 +261,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         alert.addAction(UIAlertAction(title: "Classic", style: .default, handler: { (_) in
             self.styleButton.setTitle("CLASSIC", for: .normal)
-            self.flag = false
+            self.flag = true
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
@@ -451,7 +451,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             if URL(string: post.image)?.host != nil{
                 cell.imagEView?.isHidden = false
             }else{
-                print("true")
                 cell.imagEView?.isHidden = true
             }
 
@@ -477,7 +476,18 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.present(activityVC, animated: true, completion: nil)
     }
 
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailPostView") as? DetailPostViewController
+        vc?.subreddit = posts[indexPath.row].subreddit_name_prefixed
+        vc?.authorName = posts[indexPath.row].authorName
+        vc?.Posttitle = posts[indexPath.row].postTitle
+        vc?.Postimage = posts[indexPath.row].image
+        vc?.UpVotes = posts[indexPath.row].ups
+        vc?.comments = posts[indexPath.row].commentsCount
+        
+        
+        self.present(vc!, animated: true, completion: nil)
+    }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
        
         if indexPath.row == posts.count - 1 {
