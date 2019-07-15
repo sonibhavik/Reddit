@@ -186,9 +186,17 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B24-bH-X2f">
+                                <rect key="frame" x="207" y="792" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="B24-bH-X2f" secondAttribute="bottom" constant="21" id="5Wl-kM-KjA"/>
+                            <constraint firstItem="B24-bH-X2f" firstAttribute="centerX" secondItem="pc8-fd-0Q3" secondAttribute="centerX" id="JMU-vz-KUc"/>
                             <constraint firstItem="8a8-IO-rrF" firstAttribute="trailing" secondItem="2qb-p9-rSv" secondAttribute="trailing" constant="20" id="PNB-OX-aUa"/>
                             <constraint firstItem="8a8-IO-rrF" firstAttribute="bottom" secondItem="2qb-p9-rSv" secondAttribute="bottom" constant="315" id="QpX-pJ-xm9"/>
                             <constraint firstItem="bpY-f9-sYj" firstAttribute="centerX" secondItem="pc8-fd-0Q3" secondAttribute="centerX" id="S5Z-wj-tEB"/>
@@ -198,8 +206,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8a8-IO-rrF"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="odi-DD-YQZ"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="odi-DD-YQZ">
+                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="versionLabel" destination="B24-bH-X2f" id="KIu-eO-rSt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYA-EX-a58" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

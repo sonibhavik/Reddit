@@ -9,25 +9,19 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
-    @IBAction func closeTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    let kVersion = "CFBundleShortVersionString"
+    @IBOutlet weak var versionLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        versionLabel.text = getVersion()
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func getVersion() -> String{
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary[kVersion] as! String
+        return "You are using Reddit \(String(describing: version))"
     }
-    */
+
+    
 
 }
