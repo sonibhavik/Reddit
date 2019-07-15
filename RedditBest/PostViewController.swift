@@ -242,10 +242,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
-//            let sortByButtonName = "\(self.sortType)".uppercased()
-//            sortByButton.setTitle(sortByButtonName, for: .normal)
-//            getAccessToken(type: sortType)
-        
        
     }
     @IBAction func changePostStyle(_ sender: Any) {
@@ -287,38 +283,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         getAccessToken(type: "hot")
         searchBar.showsScopeBar = false
     }
-//    func sendIntervalToPostViewController(myData: String){
-//        interval = myData
-//        flagOfInterval = true
-//    }
-//    func sendDataToPostViewController(myData: String) {
-//        posts.removeAll()
-//        OperationQueue.main.addOperation ({
-//            self.tableView.reloadData()
-//        })
-//        self.sortType = myData
-//        name = ""
-//        let sortByButtonName = "\(self.sortType)".uppercased()
-//        sortByButton.setTitle(sortByButtonName, for: .normal)
-//        getAccessToken(type: sortType)
-//    }
-    
-//    @IBAction func selectStyle(_ sender: UISegmentedControl) {
-//        switch sender.selectedSegmentIndex {
-//        case 0:
-//            flag = true
-//            OperationQueue.main.addOperation ({
-//                self.tableView.reloadData()
-//            })
-//        case 1:
-//            flag = false
-//            OperationQueue.main.addOperation ({
-//                self.tableView.reloadData()
-//            })
-//        default:
-//            break
-//        }
-//    }
     @IBOutlet weak var searchBar: UISearchBar!
     var accessToken: Any = ""
     var posts = [Post]()
@@ -484,7 +448,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         vc?.Postimage = posts[indexPath.row].image
         vc?.UpVotes = posts[indexPath.row].ups
         vc?.comments = posts[indexPath.row].commentsCount
-        
+        vc?.postLink = posts[indexPath.row].link
         
         self.navigationController?.pushViewController(vc!, animated: true)
     }

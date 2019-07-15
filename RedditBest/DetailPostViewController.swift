@@ -17,6 +17,7 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var upVotes: UITextField!
     @IBOutlet weak var commentsCount: UITextField!
     
+    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var scrollImageView: UIScrollView!
     var Postimage = ""
     var Posttitle = ""
@@ -24,6 +25,7 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
     var authorName = ""
     var UpVotes = ""
     var comments = ""
+    var postLink = ""
     let imageLoader = ImageDownload()
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,10 +65,17 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
         imageAdd(txtField: upVotes, andImage: arrowImage!)
         upVotes.text = UpVotes
         commentsCount.text = comments
+        shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
         // Do any additional setup after loading the view.
     }
     
-
+    @objc func tapped(sender: UIButton){
+        let Title = String(describing: Posttitle)
+        let link = String(describing: postLink)
+        let item = "PostTitle: \(Title)\n link: \(link)"
+        let activityVC: UIActivityViewController = UIActivityViewController(activityItems: [item], applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
