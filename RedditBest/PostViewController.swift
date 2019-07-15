@@ -290,6 +290,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var name: String = ""
     var searchIsActive = false
     let imageLoader = ImageDownload()
+    let transition = SideTransition()
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "getDataSegue" {
@@ -554,5 +555,15 @@ extension PostViewController: UISearchBarDelegate{
         OperationQueue.main.addOperation ({
             self.tableView.reloadData()
         })
+    }
+}
+extension PostViewController : UIViewControllerTransitioningDelegate{
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.isPresenting = true
+        return transition
+    }
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.isPresenting = false
+        return transition
     }
 }

@@ -19,6 +19,9 @@
 		0702384B22B8BFBA00036546 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0702384A22B8BFBA00036546 /* PostViewController.swift */; };
 		074D2F4822C7366000B733A8 /* ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074D2F4722C7366000B733A8 /* ImageDownload.swift */; };
 		07B06A2022D98CF6007C5E70 /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B06A1F22D98CF6007C5E70 /* DetailPostViewController.swift */; };
+		07B70BAF22DC8446007AD5E2 /* SideTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B70BAE22DC8446007AD5E2 /* SideTransition.swift */; };
+		07B70BB122DC8B01007AD5E2 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B70BB022DC8B01007AD5E2 /* UserViewController.swift */; };
+		07B70BB322DC93C2007AD5E2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B70BB222DC93C2007AD5E2 /* SettingsViewController.swift */; };
 		D1DC4908C71978BE54DC094F /* Pods_RedditBestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C42C6E0D419A292DC28A8 /* Pods_RedditBestTests.framework */; };
 		E18BEC0214AA21607CEB4DFE /* Pods_RedditBestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410E94338BE7AC985FBF9302 /* Pods_RedditBestUITests.framework */; };
 		E7C1CD47C1D60DDFA56CFBD2 /* Pods_RedditBest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB112FC2D77A91D88A05133 /* Pods_RedditBest.framework */; };
@@ -60,6 +63,9 @@
 		0702384A22B8BFBA00036546 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		074D2F4722C7366000B733A8 /* ImageDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownload.swift; sourceTree = "<group>"; };
 		07B06A1F22D98CF6007C5E70 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
+		07B70BAE22DC8446007AD5E2 /* SideTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideTransition.swift; sourceTree = "<group>"; };
+		07B70BB022DC8B01007AD5E2 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		07B70BB222DC93C2007AD5E2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		193C6F5C313F8562B1F8B961 /* Pods-RedditBest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditBest.release.xcconfig"; path = "Target Support Files/Pods-RedditBest/Pods-RedditBest.release.xcconfig"; sourceTree = "<group>"; };
 		410E94338BE7AC985FBF9302 /* Pods_RedditBestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditBestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB112FC2D77A91D88A05133 /* Pods_RedditBest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditBest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +135,10 @@
 				0702381A22B8AFC900036546 /* ContentView.swift */,
 				0702381C22B8AFCB00036546 /* Assets.xcassets */,
 				0702382122B8AFCB00036546 /* LaunchScreen.storyboard */,
+				07B70BB222DC93C2007AD5E2 /* SettingsViewController.swift */,
 				07B06A1F22D98CF6007C5E70 /* DetailPostViewController.swift */,
+				07B70BB022DC8B01007AD5E2 /* UserViewController.swift */,
+				07B70BAE22DC8446007AD5E2 /* SideTransition.swift */,
 				0702384822B8B5F400036546 /* ViewController.swift */,
 				0702384A22B8BFBA00036546 /* PostViewController.swift */,
 				074D2F4722C7366000B733A8 /* ImageDownload.swift */,
@@ -410,6 +419,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0702381722B8AFC900036546 /* AppDelegate.swift in Sources */,
+				07B70BB122DC8B01007AD5E2 /* UserViewController.swift in Sources */,
+				07B70BAF22DC8446007AD5E2 /* SideTransition.swift in Sources */,
+				07B70BB322DC93C2007AD5E2 /* SettingsViewController.swift in Sources */,
 				07B06A2022D98CF6007C5E70 /* DetailPostViewController.swift in Sources */,
 				0702381922B8AFC900036546 /* SceneDelegate.swift in Sources */,
 				0702384922B8B5F400036546 /* ViewController.swift in Sources */,
