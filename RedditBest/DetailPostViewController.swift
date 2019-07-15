@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailPostViewController: UIViewController {
+class DetailPostViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var subredditLabel: UILabel!
     @IBOutlet weak var authorNameLabel: UILabel!
@@ -17,6 +17,7 @@ class DetailPostViewController: UIViewController {
     @IBOutlet weak var upVotes: UITextField!
     @IBOutlet weak var commentsCount: UITextField!
     
+    @IBOutlet weak var scrollImageView: UIScrollView!
     var Postimage = ""
     var Posttitle = ""
     var subreddit = ""
@@ -28,6 +29,9 @@ class DetailPostViewController: UIViewController {
         super.awakeFromNib()
         // Initialization code
     }
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return postImage
+    }
     func imageAdd(txtField: UITextField, andImage img: UIImage){
         let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: img.size.width, height: img.size.height))
         leftImageView.image = img
@@ -36,12 +40,16 @@ class DetailPostViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.scrollImageView.minimumZoomScale = 1.0
+        self.scrollImageView.maximumZoomScale = 6.0
         subredditLabel.text = subreddit
         authorNameLabel.text = authorName
         postTitle.text = Posttitle
         if URL(string: Postimage)?.host != nil{
             self.postImage.isHidden = false
+            self.scrollImageView.isHidden = false
         }else{
+            self.scrollImageView.isHidden = true
             self.postImage.isHidden = true
         }
         imageLoader.obtainImageWithPath(imagePath: Postimage) { (image) in

@@ -486,7 +486,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         vc?.comments = posts[indexPath.row].commentsCount
         
         
-        self.present(vc!, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
        
