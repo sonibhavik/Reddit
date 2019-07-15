@@ -324,9 +324,9 @@
                                                     <rect key="frame" x="20" y="72" width="374" height="137"/>
                                                     <subviews>
                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u85-gQ-R5n">
-                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="140"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="374"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="140" id="Fki-pe-0bY"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="374" id="Uxh-aU-2wu"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
