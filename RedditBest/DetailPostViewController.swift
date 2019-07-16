@@ -42,45 +42,58 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
         txtField.leftView = leftImageView
         txtField.leftViewMode = .always
     }
+    @IBAction func tap(_ sender: UITapGestureRecognizer) {
+        sender.numberOfTapsRequired = 2
+        guard sender.view != nil else {
+            return
+        }
+        if(self.scrollImageView.zoomScale > self.scrollImageView.minimumZoomScale){
+            self.scrollImageView.setZoomScale(self.scrollImageView.minimumZoomScale, animated: true)
+        }
+        else{
+            self.scrollImageView.setZoomScale(self.scrollImageView.maximumZoomScale, animated: true)
+        }
+    }
     @IBAction func tapPiece(_ gestureRecognizer : UITapGestureRecognizer ) {
-        guard gestureRecognizer.view != nil else { return }
-        print("hello")
-        if show {
-            UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
-                self.subredditLabel.alpha = 0
-                self.authorNameLabel.alpha = 0
-                self.postTitle.alpha = 0
-                self.upVotes.alpha = 0
-                self.commentsCount.alpha = 0
-                self.shareButton.alpha = 0
+        gestureRecognizer.numberOfTapsRequired = 1
+            guard gestureRecognizer.view != nil else { return }
+            if show {
+                UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
+                    self.subredditLabel.alpha = 0
+                    self.authorNameLabel.alpha = 0
+                    self.postTitle.alpha = 0
+                    self.upVotes.alpha = 0
+                    self.commentsCount.alpha = 0
+                    self.shareButton.alpha = 0
+                    // Here you will get the animation you want
+                }, completion: { _ in
+                    self.subredditLabel.isHidden = true
+                    self.authorNameLabel.isHidden = true
+                    self.postTitle.isHidden = true
+                    self.upVotes.isHidden = true
+                    self.commentsCount.isHidden = true
+                    self.shareButton.isHidden = true// Here you hide it when animation done
+                })
+                show = !show
+            }else {   UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
+                self.subredditLabel.alpha = 1
+                self.authorNameLabel.alpha = 1
+                self.postTitle.alpha = 1
+                self.upVotes.alpha = 1
+                self.commentsCount.alpha = 1
+                self.shareButton.alpha = 1
                 // Here you will get the animation you want
             }, completion: { _ in
-                self.subredditLabel.isHidden = true
-                self.authorNameLabel.isHidden = true
-                self.postTitle.isHidden = true
-                self.upVotes.isHidden = true
-                self.commentsCount.isHidden = true
-                self.shareButton.isHidden = true// Here you hide it when animation done
+                self.subredditLabel.isHidden = false
+                self.authorNameLabel.isHidden = false
+                self.postTitle.isHidden = false
+                self.upVotes.isHidden = false
+                self.commentsCount.isHidden = false
+                self.shareButton.isHidden = false// Here you hide it when animation done
             })
-            show = !show
-        }else {   UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
-            self.subredditLabel.alpha = 1
-            self.authorNameLabel.alpha = 1
-            self.postTitle.alpha = 1
-            self.upVotes.alpha = 1
-            self.commentsCount.alpha = 1
-            self.shareButton.alpha = 1
-            // Here you will get the animation you want
-        }, completion: { _ in
-            self.subredditLabel.isHidden = false
-            self.authorNameLabel.isHidden = false
-            self.postTitle.isHidden = false
-            self.upVotes.isHidden = false
-            self.commentsCount.isHidden = false
-            self.shareButton.isHidden = false// Here you hide it when animation done
-        })
-            show = !show
-        }
+                show = !show
+            }
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

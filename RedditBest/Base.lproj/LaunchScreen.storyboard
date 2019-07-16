@@ -602,7 +602,7 @@
                                     <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9y-MJ-PFn">
                                         <rect key="frame" x="0.0" y="222" width="414" height="374"/>
                                         <subviews>
-                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VbE-6s-6ZM">
+                                            <imageView hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VbE-6s-6ZM">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="374"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="374" id="KoN-jK-JIZ"/>
@@ -701,6 +701,7 @@
                         <viewLayoutGuide key="safeArea" id="SQv-6d-2YG"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="FWd-je-r6K" appends="YES" id="Ztd-kt-RcF"/>
+                            <outletCollection property="gestureRecognizers" destination="bFB-SK-u1W" appends="YES" id="UIB-fa-Z9Z"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="5qX-6L-HbQ"/>
@@ -718,7 +719,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZLg-07-ypI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="FWd-je-r6K">
                     <connections>
-                        <action selector="tapPiece:" destination="Y29-54-gmh" id="h41-h3-yPX"/>
+                        <action selector="tapPiece:" destination="Y29-54-gmh" id="I5y-qG-Cvv"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="bFB-SK-u1W">
+                    <connections>
+                        <action selector="tap:" destination="Y29-54-gmh" id="JEr-PV-yHu"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
