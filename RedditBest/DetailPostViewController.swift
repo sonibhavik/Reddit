@@ -19,6 +19,9 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var upVotes: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var scrollImageView: UIScrollView!
+    @IBAction func closeTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     var Postimage = ""
     var Posttitle = ""
     var subreddit = ""

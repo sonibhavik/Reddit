@@ -213,7 +213,7 @@
                             <constraint firstAttribute="bottomMargin" secondItem="B24-bH-X2f" secondAttribute="bottom" constant="21" id="5Wl-kM-KjA"/>
                             <constraint firstItem="8a8-IO-rrF" firstAttribute="trailing" secondItem="2qb-p9-rSv" secondAttribute="trailing" id="Fvo-ec-pnM"/>
                             <constraint firstItem="B24-bH-X2f" firstAttribute="centerX" secondItem="pc8-fd-0Q3" secondAttribute="centerX" id="JMU-vz-KUc"/>
-                            <constraint firstItem="8a8-IO-rrF" firstAttribute="bottom" secondItem="2qb-p9-rSv" secondAttribute="bottom" constant="315" id="QpX-pJ-xm9"/>
+                            <constraint firstItem="8a8-IO-rrF" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="2qb-p9-rSv" secondAttribute="bottom" constant="315" id="QpX-pJ-xm9"/>
                             <constraint firstItem="bpY-f9-sYj" firstAttribute="centerX" secondItem="pc8-fd-0Q3" secondAttribute="centerX" id="S5Z-wj-tEB"/>
                             <constraint firstItem="2qb-p9-rSv" firstAttribute="leading" secondItem="8a8-IO-rrF" secondAttribute="leading" id="ZCP-CS-Joj"/>
                             <constraint firstItem="2qb-p9-rSv" firstAttribute="top" secondItem="8a8-IO-rrF" secondAttribute="top" constant="44" id="rck-hH-IyB"/>
@@ -676,19 +676,41 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nRm-Aa-bK3">
+                                <rect key="frame" x="20" y="0.0" width="25" height="25"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPE-Hz-Sv0">
+                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="M3h-h2-CMm"/>
+                                            <constraint firstAttribute="height" constant="25" id="UGz-nS-du1"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="close"/>
+                                        <connections>
+                                            <action selector="closeTapped:" destination="Y29-54-gmh" eventType="touchUpInside" id="2l0-yN-lru"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="SQv-6d-2YG" firstAttribute="trailing" secondItem="axq-62-MCQ" secondAttribute="trailing" id="BTh-qk-QcC"/>
-                            <constraint firstItem="yjA-ZC-Det" firstAttribute="top" secondItem="SQv-6d-2YG" secondAttribute="top" id="GHc-ve-dlB"/>
                             <constraint firstAttribute="bottom" secondItem="axq-62-MCQ" secondAttribute="bottom" id="LGI-Zn-Q9R"/>
                             <constraint firstItem="9kK-jk-79m" firstAttribute="top" secondItem="yjA-ZC-Det" secondAttribute="bottom" constant="8" id="VHd-D4-bys"/>
                             <constraint firstItem="9kK-jk-79m" firstAttribute="leading" secondItem="SQv-6d-2YG" secondAttribute="leading" constant="20" id="aMc-yn-RQM"/>
+                            <constraint firstItem="yjA-ZC-Det" firstAttribute="top" secondItem="nRm-Aa-bK3" secondAttribute="bottom" constant="19" id="dFg-i1-unh"/>
                             <constraint firstItem="SQv-6d-2YG" firstAttribute="trailing" secondItem="rW3-VP-lXz" secondAttribute="trailing" constant="20" id="dXG-Jg-9Fx"/>
+                            <constraint firstAttribute="trailing" secondItem="nRm-Aa-bK3" secondAttribute="trailing" constant="369" id="ddm-og-bGA"/>
+                            <constraint firstItem="nRm-Aa-bK3" firstAttribute="top" secondItem="IPX-36-rm7" secondAttribute="top" id="fFt-zB-Qnp"/>
+                            <constraint firstItem="yjA-ZC-Det" firstAttribute="leading" secondItem="SQv-6d-2YG" secondAttribute="leading" constant="20" id="hW3-3A-Lwy"/>
                             <constraint firstItem="axq-62-MCQ" firstAttribute="top" secondItem="IPX-36-rm7" secondAttribute="top" id="iCu-zL-4Ha"/>
                             <constraint firstItem="axq-62-MCQ" firstAttribute="leading" secondItem="SQv-6d-2YG" secondAttribute="leading" id="pNn-NE-jgJ"/>
+                            <constraint firstItem="nRm-Aa-bK3" firstAttribute="leading" secondItem="IPX-36-rm7" secondAttribute="leading" constant="20" id="ttp-a0-Klo"/>
                             <constraint firstItem="rW3-VP-lXz" firstAttribute="leading" secondItem="SQv-6d-2YG" secondAttribute="leading" constant="20" id="uOV-bj-wgF"/>
+                            <constraint firstItem="yjA-ZC-Det" firstAttribute="top" secondItem="nRm-Aa-bK3" secondAttribute="bottom" constant="19" id="uhh-bE-RfM"/>
                             <constraint firstItem="yjA-ZC-Det" firstAttribute="leading" secondItem="9kK-jk-79m" secondAttribute="leading" id="wMA-Yn-A5a"/>
                             <constraint firstItem="SQv-6d-2YG" firstAttribute="trailing" secondItem="9kK-jk-79m" secondAttribute="trailing" constant="20" id="wox-AN-vuM"/>
                             <constraint firstItem="SQv-6d-2YG" firstAttribute="bottom" secondItem="rW3-VP-lXz" secondAttribute="bottom" id="xKh-yX-jhN"/>
@@ -3289,6 +3311,7 @@ abJusnSyfLJ+soCygrKEsomykcP9w//EBMQSxBbEHcQixC/EMsQ/xETETMRPxFTEXMRfxHHEdMR5AAAA
 AAAAAgEAAAAAAAAAbQAAAAAAAAAAAAAAAAAAxHs
 </mutableData>
         </image>
+        <image name="close" width="25" height="25"/>
         <image name="comment" width="25" height="25"/>
         <image name="comment1" width="25" height="25"/>
         <image name="house" catalog="system" width="64" height="54"/>
