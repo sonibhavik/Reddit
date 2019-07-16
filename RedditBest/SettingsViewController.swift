@@ -16,6 +16,21 @@ class SettingsViewController: UIViewController {
         versionLabel.text = getVersion()
         // Do any additional setup after loading the view.
     }
+    @IBAction func contentPolicyTapped(_ sender: Any) {
+        UIApplication.shared.open(NSURL(string: "https://www.redditinc.com/policies/content-policy")! as URL)
+    }
+    @IBAction func privacyPolicyTapped(_ sender: Any) {
+        UIApplication.shared.open(NSURL(string: "https://www.redditinc.com/policies/privacy-policy")! as URL)
+    }
+    @IBAction func userAgreementTapped(_ sender: Any) {
+        UIApplication.shared.open(NSURL(string: "https://www.redditinc.com/policies/user-agreement")! as URL)
+    }
+    @IBAction func helpFaqTapped(_ sender: Any) {
+        UIApplication.shared.open(NSURL(string: "https://www.reddithelp.com/en/categories/reddit-apps/reddit-ios-app?utm_source=share&utm_medium=ios_app")! as URL)
+    }
+    @IBAction func reportABugTapped(_ sender: Any) {
+        UIApplication.shared.open(NSURL(string: "https://www.reddithelp.com/en/submit-request/mobile-help?utm_source=share&utm_medium=ios_app")! as URL)
+    }
     func getVersion() -> String{
         let dictionary = Bundle.main.infoDictionary!
         let version = dictionary[kVersion] as! String

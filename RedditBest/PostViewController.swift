@@ -41,23 +41,13 @@ class TableCell: UITableViewCell {
     @IBOutlet weak var authorName: UILabel!
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var subReddit: UILabel!
-    @IBOutlet weak var Comment: UITextField!
-    @IBOutlet weak var Ups: UITextField!
     @IBOutlet weak var imagEView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var Ups: UIButton!
+    @IBOutlet weak var Comment: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        let commentImage = UIImage(named: "comment")
-        imageAdd(txtField: Comment, andImage: commentImage!)
-        let arrowImage = UIImage(named: "arrow")
-        imageAdd(txtField: Ups, andImage: arrowImage!)
         // Initialization code
-    }
-    func imageAdd(txtField: UITextField, andImage img: UIImage){
-            let leftImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: img.size.width, height: img.size.height))
-            leftImageView.image = img
-            txtField.leftView = leftImageView
-        txtField.leftViewMode = .always
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -424,8 +414,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     updateCell.imagEView.image = image
                 }
             }
-            cell.Comment.text = post.commentsCount
-            cell.Ups.text = post.ups
+            let comments = " \(post.commentsCount)"
+            cell.Comment.setTitle(comments, for: .normal)
+            cell.Ups.setTitle(post.ups, for: .normal)
             cell.shareButton.tag = indexPath.row
             cell.shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
             return cell
@@ -452,6 +443,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         vc?.postLink = posts[indexPath.row].link
         
         self.navigationController?.pushViewController(vc!, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
        
