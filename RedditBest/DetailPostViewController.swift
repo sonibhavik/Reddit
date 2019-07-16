@@ -75,22 +75,41 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
                     self.shareButton.isHidden = true// Here you hide it when animation done
                 })
                 show = !show
-            }else {   UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
-                self.subredditLabel.alpha = 1
-                self.authorNameLabel.alpha = 1
-                self.postTitle.alpha = 1
-                self.upVotes.alpha = 1
-                self.commentsCount.alpha = 1
-                self.shareButton.alpha = 1
+            }else {
+                UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
+                    self.subredditLabel.alpha = 0.5
+                    self.authorNameLabel.alpha = 0.5
+                    self.postTitle.alpha = 0.5
+                    self.upVotes.alpha = 0.5
+                    self.commentsCount.alpha = 0.5
+                    self.shareButton.alpha = 0.5
                 // Here you will get the animation you want
-            }, completion: { _ in
-                self.subredditLabel.isHidden = false
-                self.authorNameLabel.isHidden = false
-                self.postTitle.isHidden = false
-                self.upVotes.isHidden = false
-                self.commentsCount.isHidden = false
-                self.shareButton.isHidden = false// Here you hide it when animation done
-            })
+                }, completion: { _ in
+                    self.subredditLabel.isHidden = false
+                    self.authorNameLabel.isHidden = false
+                    self.postTitle.isHidden = false
+                    self.upVotes.isHidden = false
+                    self.commentsCount.isHidden = false
+                    self.shareButton.isHidden = false// Here you hide it when animation done
+                }
+                )
+                UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
+                    self.subredditLabel.alpha = 1
+                    self.authorNameLabel.alpha = 1
+                    self.postTitle.alpha = 1
+                    self.upVotes.alpha = 1
+                    self.commentsCount.alpha = 1
+                    self.shareButton.alpha = 1
+                    // Here you will get the animation you want
+                }, completion: { _ in
+                    self.subredditLabel.isHidden = false
+                    self.authorNameLabel.isHidden = false
+                    self.postTitle.isHidden = false
+                    self.upVotes.isHidden = false
+                    self.commentsCount.isHidden = false
+                    self.shareButton.isHidden = false// Here you hide it when animation done
+                }
+                )
                 show = !show
             }
         

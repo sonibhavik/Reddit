@@ -241,29 +241,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reddit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btg-2B-D8O">
-                                <rect key="frame" x="172" y="44" width="70.5" height="72"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <searchBar contentMode="redraw" placeholder="Enter " showsCancelButton="YES" showsScopeBar="YES" id="GsT-TL-sZt">
-                                <rect key="frame" x="0.0" y="126" width="414" height="103"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <color key="barTintColor" cocoaTouchSystemColor="systemGrayColor"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>AuthorName</string>
-                                    <string>PostTitle</string>
-                                    <string>SubReddit</string>
-                                </scopeButtonTitles>
-                                <connections>
-                                    <outlet property="delegate" destination="RVR-nM-J05" id="1Hx-ZK-Oyc"/>
-                                </connections>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5bz-iN-VuM">
-                                <rect key="frame" x="0.0" y="229" width="414" height="584"/>
+                                <rect key="frame" x="0.0" y="191" width="414" height="622"/>
                                 <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="chE-bJ-Xe2">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -523,6 +502,21 @@
                                     <outlet property="delegate" destination="RVR-nM-J05" id="cyo-OI-5aU"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="Enter " showsCancelButton="YES" showsScopeBar="YES" id="GsT-TL-sZt">
+                                <rect key="frame" x="0.0" y="88" width="414" height="103"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="barTintColor" cocoaTouchSystemColor="systemGrayColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>AuthorName</string>
+                                    <string>PostTitle</string>
+                                    <string>SubReddit</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="RVR-nM-J05" id="1Hx-ZK-Oyc"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -531,11 +525,8 @@
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="trailing" secondItem="Vlr-hL-Oga" secondAttribute="trailing" id="LUZ-iD-JEB"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="top" secondItem="GsT-TL-sZt" secondAttribute="bottom" id="OSL-eQ-S3q"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="leading" secondItem="Vlr-hL-Oga" secondAttribute="leading" id="TlF-2g-AhV"/>
-                            <constraint firstItem="GsT-TL-sZt" firstAttribute="top" secondItem="Btg-2B-D8O" secondAttribute="bottom" constant="10" id="YLL-g7-X0k"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="leading" secondItem="Vlr-hL-Oga" secondAttribute="leading" id="en8-bS-kUp"/>
                             <constraint firstItem="5bz-iN-VuM" firstAttribute="bottom" secondItem="Vlr-hL-Oga" secondAttribute="bottom" id="kmn-82-XeU"/>
-                            <constraint firstItem="Btg-2B-D8O" firstAttribute="centerX" secondItem="yBw-fQ-4tD" secondAttribute="centerX" id="l2R-lY-gdN"/>
-                            <constraint firstItem="Btg-2B-D8O" firstAttribute="top" secondItem="Vlr-hL-Oga" secondAttribute="top" id="vOO-RO-6hj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vlr-hL-Oga"/>
                     </view>
@@ -597,10 +588,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="axq-62-MCQ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9y-MJ-PFn">
-                                        <rect key="frame" x="0.0" y="222" width="414" height="374"/>
+                                        <rect key="frame" x="0.0" y="261" width="414" height="374"/>
                                         <subviews>
                                             <imageView hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VbE-6s-6ZM">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="374"/>
@@ -612,6 +603,8 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="374" id="I5S-i7-19P"/>
                                             <constraint firstItem="VbE-6s-6ZM" firstAttribute="leading" secondItem="e9y-MJ-PFn" secondAttribute="leading" id="JOk-0j-d85"/>
+                                            <constraint firstItem="VbE-6s-6ZM" firstAttribute="centerY" secondItem="e9y-MJ-PFn" secondAttribute="centerY" id="N1d-yp-2Go"/>
+                                            <constraint firstItem="VbE-6s-6ZM" firstAttribute="centerX" secondItem="e9y-MJ-PFn" secondAttribute="centerX" id="R83-2n-lRH"/>
                                             <constraint firstItem="VbE-6s-6ZM" firstAttribute="leading" secondItem="qeJ-jJ-J8U" secondAttribute="leading" id="ZHw-K9-Nmf"/>
                                             <constraint firstItem="VbE-6s-6ZM" firstAttribute="centerX" secondItem="e9y-MJ-PFn" secondAttribute="centerX" id="ZcB-vk-3xn"/>
                                             <constraint firstAttribute="trailing" secondItem="VbE-6s-6ZM" secondAttribute="trailing" id="fvQ-e1-Fkz"/>
@@ -627,8 +620,10 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="e9y-MJ-PFn" firstAttribute="centerY" secondItem="axq-62-MCQ" secondAttribute="centerY" id="AHa-x1-iSo"/>
+                                    <constraint firstItem="e9y-MJ-PFn" firstAttribute="centerX" secondItem="axq-62-MCQ" secondAttribute="centerX" id="Act-uv-nCG"/>
                                     <constraint firstItem="e9y-MJ-PFn" firstAttribute="leading" secondItem="axq-62-MCQ" secondAttribute="leading" id="SVt-ZL-utN"/>
                                     <constraint firstAttribute="trailing" secondItem="e9y-MJ-PFn" secondAttribute="trailing" id="oQ5-pJ-2BT"/>
+                                    <constraint firstItem="e9y-MJ-PFn" firstAttribute="centerY" secondItem="axq-62-MCQ" secondAttribute="centerY" id="oSC-MF-4FH"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="yjA-ZC-Det">
@@ -687,11 +682,11 @@
                         <constraints>
                             <constraint firstItem="SQv-6d-2YG" firstAttribute="trailing" secondItem="axq-62-MCQ" secondAttribute="trailing" id="BTh-qk-QcC"/>
                             <constraint firstItem="yjA-ZC-Det" firstAttribute="top" secondItem="SQv-6d-2YG" secondAttribute="top" id="GHc-ve-dlB"/>
-                            <constraint firstItem="SQv-6d-2YG" firstAttribute="bottom" secondItem="axq-62-MCQ" secondAttribute="bottom" id="OyO-IW-nbQ"/>
-                            <constraint firstItem="axq-62-MCQ" firstAttribute="top" secondItem="SQv-6d-2YG" secondAttribute="top" id="V5k-UP-QIr"/>
+                            <constraint firstAttribute="bottom" secondItem="axq-62-MCQ" secondAttribute="bottom" id="LGI-Zn-Q9R"/>
                             <constraint firstItem="9kK-jk-79m" firstAttribute="top" secondItem="yjA-ZC-Det" secondAttribute="bottom" constant="8" id="VHd-D4-bys"/>
                             <constraint firstItem="9kK-jk-79m" firstAttribute="leading" secondItem="SQv-6d-2YG" secondAttribute="leading" constant="20" id="aMc-yn-RQM"/>
                             <constraint firstItem="SQv-6d-2YG" firstAttribute="trailing" secondItem="rW3-VP-lXz" secondAttribute="trailing" constant="20" id="dXG-Jg-9Fx"/>
+                            <constraint firstItem="axq-62-MCQ" firstAttribute="top" secondItem="IPX-36-rm7" secondAttribute="top" id="iCu-zL-4Ha"/>
                             <constraint firstItem="axq-62-MCQ" firstAttribute="leading" secondItem="SQv-6d-2YG" secondAttribute="leading" id="pNn-NE-jgJ"/>
                             <constraint firstItem="rW3-VP-lXz" firstAttribute="leading" secondItem="SQv-6d-2YG" secondAttribute="leading" constant="20" id="uOV-bj-wgF"/>
                             <constraint firstItem="yjA-ZC-Det" firstAttribute="leading" secondItem="9kK-jk-79m" secondAttribute="leading" id="wMA-Yn-A5a"/>
@@ -722,7 +717,7 @@
                         <action selector="tapPiece:" destination="Y29-54-gmh" id="I5y-qG-Cvv"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="bFB-SK-u1W">
+                <tapGestureRecognizer numberOfTapsRequired="2" id="bFB-SK-u1W">
                     <connections>
                         <action selector="tap:" destination="Y29-54-gmh" id="JEr-PV-yHu"/>
                     </connections>

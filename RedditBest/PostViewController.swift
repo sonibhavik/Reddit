@@ -55,20 +55,23 @@ class TableCell: UITableViewCell {
     }
 }
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-   var sortByName = ""
+    var sortByName = ""
     var interval = ""
     var flagOfInterval = false
-   var flag = false
-        let myIndicator = UIActivityIndicatorView(style : UIActivityIndicatorView.Style.medium)
+    var flag = false
+    let myIndicator = UIActivityIndicatorView(style : UIActivityIndicatorView.Style.medium)
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var styleButton: UIButton!
     @IBOutlet weak var sortByButton: UIButton!
     @IBAction func sortBy(_ sender: Any) {
     
-            myIndicator.startAnimating()
+        
             let alert = UIAlertController(title: "SORT POSTS BY", message: "Please Select an Option", preferredStyle: .actionSheet)
             let hotButton = UIAlertAction(title: "Hot", style: .default, handler: { (_) in
+                self.myIndicator.startAnimating()
+                self.posts.removeAll()
                 self.name = ""
                 self.sortByName = "HOT".lowercased()
                 self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS", for: .normal)
@@ -76,6 +79,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             })
         alert.addAction(hotButton)
             let newButton = UIAlertAction(title: "New", style: .default, handler: { (_) in
+                self.myIndicator.startAnimating()
+                self.posts.removeAll()
                 self.name = ""
                 self.sortByName = "NEW".lowercased()
                 self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS", for: .normal)
@@ -85,10 +90,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
        
 
             let topButton = UIAlertAction(title: "Top", style: .default, handler: { (_) in
-                
+                    self.myIndicator.startAnimating()
                     let alert = UIAlertController(title: "TOP POSTS FROM", message: "Please Select an Option", preferredStyle: .actionSheet)
                     self.flagOfInterval = true
                     self.name = ""
+                    self.posts.removeAll()
                     let nowButton = UIAlertAction(title: "Now", style: .default, handler: { (_) in
                         
                         self.interval = "hour"
@@ -137,7 +143,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     alert.addAction(allButton)
                 
                 alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
-                    self.getAccessToken(type: "hot")
+                    self.myIndicator.stopAnimating()
                     self.dismiss(animated: true, completion: nil)
                 }))
 
@@ -151,9 +157,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         let controversialButton = UIAlertAction(title: "Controversial", style: .default, handler: { (_) in
             let alert = UIAlertController(title: "CONTROVERSIAL POSTS FROM", message: "Please Select an Option", preferredStyle: .actionSheet)
+            self.myIndicator.startAnimating()
             self.flagOfInterval = true
             self.name = ""
-
+            self.posts.removeAll()
             let nowButton = UIAlertAction(title: "Now", style: .default, handler: { (_) in
                 
                 self.interval = "hour"
@@ -202,7 +209,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             alert.addAction(allButton)
             
             alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
-                self.getAccessToken(type: "hot")
+                self.myIndicator.stopAnimating()
                 self.dismiss(animated: true, completion: nil)
             }))
             
@@ -213,22 +220,22 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
         alert.addAction(controversialButton)
             let risingButton = UIAlertAction(title: "Rising", style: .default, handler: { (_) in
+                self.myIndicator.startAnimating()
                 self.name = ""
-
+                self.posts.removeAll()
                 self.sortByName = "RISING".lowercased()
                 self.sortByButton.setTitle("\(self.sortByName.uppercased()) POSTS", for: .normal)
                 self.getAccessToken(type: self.sortByName)
             })
         alert.addAction(risingButton)
             alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (_) in
-                self.getAccessToken(type: "hot")
+                self.myIndicator.stopAnimating()
                 self.dismiss(animated: true, completion: nil)
             }))
             
             self.present(alert, animated: true, completion: {
                 print("completion block")
             })
-            posts.removeAll()
             OperationQueue.main.addOperation ({
                 self.tableView.reloadData()
             })
@@ -272,6 +279,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.setHidesBackButton(true, animated: false)
         getAccessToken(type: "hot")
         searchBar.showsScopeBar = false
+        navigationItem.title = "Reddit"
     }
     @IBOutlet weak var searchBar: UISearchBar!
     var accessToken: Any = ""
@@ -442,7 +450,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         vc?.comments = posts[indexPath.row].commentsCount
         vc?.postLink = posts[indexPath.row].link
         
-        self.navigationController?.pushViewController(vc!, animated: true)
+        self.present(vc!, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
