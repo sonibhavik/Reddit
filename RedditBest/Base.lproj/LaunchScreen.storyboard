@@ -724,6 +724,7 @@
                     <navigationItem key="navigationItem" id="5qX-6L-HbQ"/>
                     <connections>
                         <outlet property="authorNameLabel" destination="ggg-Ls-K31" id="oZI-BH-cAA"/>
+                        <outlet property="closeButton" destination="BPE-Hz-Sv0" id="5tf-3i-dVA"/>
                         <outlet property="commentsCount" destination="goI-9l-TlH" id="kGV-FV-OI3"/>
                         <outlet property="postImage" destination="VbE-6s-6ZM" id="Ep2-NU-x45"/>
                         <outlet property="postTitle" destination="9kK-jk-79m" id="wPJ-3R-jHp"/>

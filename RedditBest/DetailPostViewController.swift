@@ -19,6 +19,7 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var upVotes: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var scrollImageView: UIScrollView!
+    @IBOutlet weak var closeButton: UIButton!
     @IBAction func closeTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -68,6 +69,7 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
                     self.upVotes.alpha = 0
                     self.commentsCount.alpha = 0
                     self.shareButton.alpha = 0
+                    self.closeButton.alpha = 0
                     // Here you will get the animation you want
                 }, completion: { _ in
                     self.subredditLabel.isHidden = true
@@ -75,7 +77,8 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
                     self.postTitle.isHidden = true
                     self.upVotes.isHidden = true
                     self.commentsCount.isHidden = true
-                    self.shareButton.isHidden = true// Here you hide it when animation done
+                    self.shareButton.isHidden = true
+                    self.closeButton.isHidden = true// Here you hide it when animation done
                 })
                 show = !show
             }else {
@@ -86,6 +89,7 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
                     self.upVotes.alpha = 0.5
                     self.commentsCount.alpha = 0.5
                     self.shareButton.alpha = 0.5
+                    self.closeButton.alpha = 0.5
                 // Here you will get the animation you want
                 }, completion: { _ in
                     self.subredditLabel.isHidden = false
@@ -93,7 +97,8 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
                     self.postTitle.isHidden = false
                     self.upVotes.isHidden = false
                     self.commentsCount.isHidden = false
-                    self.shareButton.isHidden = false// Here you hide it when animation done
+                    self.shareButton.isHidden = false
+                    self.closeButton.isHidden = false// Here you hide it when animation done
                 }
                 )
                 UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
@@ -103,6 +108,7 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
                     self.upVotes.alpha = 1
                     self.commentsCount.alpha = 1
                     self.shareButton.alpha = 1
+                    self.closeButton.alpha = 1
                     // Here you will get the animation you want
                 }, completion: { _ in
                     self.subredditLabel.isHidden = false
