@@ -442,13 +442,20 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailPostView") as? DetailPostViewController
-        vc?.subreddit = posts[indexPath.row].subreddit_name_prefixed
-        vc?.authorName = posts[indexPath.row].authorName
-        vc?.Posttitle = posts[indexPath.row].postTitle
-        vc?.Postimage = posts[indexPath.row].image
-        vc?.UpVotes = posts[indexPath.row].ups
-        vc?.comments = posts[indexPath.row].commentsCount
-        vc?.postLink = posts[indexPath.row].link
+        let post : Post
+        if searchIsActive{
+            post = searchedPost[indexPath.row]
+        }else{
+            searchBar.showsScopeBar = false
+            post = posts[indexPath.row]
+        }
+        vc?.subreddit = post.subreddit_name_prefixed
+        vc?.authorName = post.authorName
+        vc?.Posttitle = post.postTitle
+        vc?.Postimage = post.image
+        vc?.UpVotes = post.ups
+        vc?.comments = post.commentsCount
+        vc?.postLink = post.link
         
         self.present(vc!, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
