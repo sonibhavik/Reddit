@@ -10,6 +10,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     let kVersion = "CFBundleShortVersionString"
+    @IBOutlet weak var tablEView: UITableView!
     @IBOutlet weak var versionLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -35,7 +35,6 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // Initialization code
     }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return postImage
@@ -78,30 +77,20 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
                     self.upVotes.isHidden = true
                     self.commentsCount.isHidden = true
                     self.shareButton.isHidden = true
-                    self.closeButton.isHidden = true// Here you hide it when animation done
+                    self.closeButton.isHidden = true
                 })
                 show = !show
             }else {
                 UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
-                    self.subredditLabel.alpha = 0.5
-                    self.authorNameLabel.alpha = 0.5
-                    self.postTitle.alpha = 0.5
-                    self.upVotes.alpha = 0.5
-                    self.commentsCount.alpha = 0.5
-                    self.shareButton.alpha = 0.5
-                    self.closeButton.alpha = 0.5
-                // Here you will get the animation you want
-                }, completion: { _ in
                     self.subredditLabel.isHidden = false
                     self.authorNameLabel.isHidden = false
                     self.postTitle.isHidden = false
                     self.upVotes.isHidden = false
                     self.commentsCount.isHidden = false
                     self.shareButton.isHidden = false
-                    self.closeButton.isHidden = false// Here you hide it when animation done
-                }
-                )
-                UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
+                    self.closeButton.isHidden = false
+                   
+                }, completion: { _ in
                     self.subredditLabel.alpha = 1
                     self.authorNameLabel.alpha = 1
                     self.postTitle.alpha = 1
@@ -109,14 +98,6 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
                     self.commentsCount.alpha = 1
                     self.shareButton.alpha = 1
                     self.closeButton.alpha = 1
-                    // Here you will get the animation you want
-                }, completion: { _ in
-                    self.subredditLabel.isHidden = false
-                    self.authorNameLabel.isHidden = false
-                    self.postTitle.isHidden = false
-                    self.upVotes.isHidden = false
-                    self.commentsCount.isHidden = false
-                    self.shareButton.isHidden = false// Here you hide it when animation done
                 }
                 )
                 show = !show
@@ -148,10 +129,6 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
         
         shareButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
         
-        
-        // function which is triggered when handleTap is called
-       
-        // Do any additional setup after loading the view.
     }
     @objc func tapped(sender: UIButton){
         let Title = String(describing: Posttitle)
@@ -160,14 +137,4 @@ class DetailPostViewController: UIViewController, UIScrollViewDelegate {
         let activityVC: UIActivityViewController = UIActivityViewController(activityItems: [item], applicationActivities: nil)
         self.present(activityVC, animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
